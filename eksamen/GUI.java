@@ -56,6 +56,7 @@ public class GUI extends Application {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Register", 50, 50));
         ((BorderPane) pane).setCenter(new RegisterPane());
         ((BorderPane) pane).setBottom(new BackPane("Go Back"));
+
         return null;
     }
 
@@ -70,13 +71,14 @@ public class GUI extends Application {
         ((BorderPane) pane).setTop(new HeaderPane(title, 50, 50));
         ((BorderPane) pane).setCenter(new OptionsHeaderPane("register", "login"));
         ((BorderPane) pane).setBottom((new FooterHeaderPane(info)));
+        ((BorderPane) pane).setLeft(null);
 		return null;
     }
     public static BorderPane registerDone(){
         ((BorderPane) pane).setTop(new HeaderPane(title, 25, 30));
         ((BorderPane) pane).setLeft(new Menu());
         ((BorderPane) pane).setCenter(new Output());
-        //((BorderPane) pane).setBottom((new FooterHeaderPane(info)));
+        ((BorderPane) pane).setBottom((new FooterMenuPane()));
         return null;
     }
 
