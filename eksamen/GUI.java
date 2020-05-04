@@ -1,14 +1,22 @@
 package eksamen;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
  
 public class GUI extends Application {
+    private static String url = "jdbc:sqlite:DateMe.db";
+    private static Connection conn = null;
 
     public static void main(String[] args) {
+        kobleOpp();
         launch(args);
+        kobleNed();
     }
 
     private static BorderPane pane;
@@ -29,6 +37,22 @@ public class GUI extends Application {
 
         // boolean test = OptionsHeaderPane.registerPress();
 
+    }
+    private static void kobleOpp() {
+        try {
+            System.out.println("KOBLET OPP");
+            conn = DriverManager.getConnection(url);
+    }
+    catch (SQLException e) {
+        System.out.println("Oppkobling til databasen" + url + " feilet." + "\n" + e.toString() );
+    }
+}
+    private static void kobleNed() {
+    try {
+        System.out.println("KOBLET NED");
+        conn.close();
+    }
+    catch (SQLException e) { }
     }
 
     public static BorderPane registerAction() {
