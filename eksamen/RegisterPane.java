@@ -39,17 +39,26 @@ class RegisterPane extends StackPane {
         Label intrest1Label = new Label("Intrest 1");
         setMargin(intrest1Label, new Insets(0, 200, 100, 0));
         ComboBox<String> intrest1Combo = new ComboBox<String>();
-        intrest1Combo.getItems().addAll("Woman", "Man");
+        intrest1Combo.getItems().addAll("Tur", "Seiling", "Fiske", "Hest", "Sykle", "Trening", 
+                                        "Gaming", "Fotografering", "Klatring", "Matlaging", 
+                                        "Strikking/Hekling", "Musikk", "Lesing", "Sjakk", 
+                                        "Dans/sang", "Seiling", "Hiking", "Drivhus", "Motorsport", "Sport" );
         setMargin(intrest1Combo, new Insets(0, 200, 50, 0));
         Label intrest2Label = new Label("Intrest 2");
         setMargin(intrest2Label, new Insets(0, 0, 100, 0));
         ComboBox<String> intrest2Combo = new ComboBox<String>();
-        intrest2Combo.getItems().addAll("Woman", "Man");
+        intrest2Combo.getItems().addAll("Tur", "Seiling", "Fiske", "Hest", "Sykle", "Trening", 
+                                        "Gaming", "Fotografering", "Klatring", "Matlaging", 
+                                        "Strikking/Hekling", "Musikk", "Lesing", "Sjakk", 
+                                        "Dans/sang", "Seiling", "Hiking", "Drivhus", "Motorsport", "Sport");
         setMargin(intrest2Combo, new Insets(0, 0, 50, 0));
         Label intrest3Label = new Label("Intrest 3");
         setMargin(intrest3Label, new Insets(0, 0, 100, 200));
         ComboBox<String> intrest3Combo = new ComboBox<String>();
-        intrest3Combo.getItems().addAll("Woman", "Man");
+        intrest3Combo.getItems().addAll("Tur", "Seiling", "Fiske", "Hest", "Sykle", "Trening", 
+                                        "Gaming", "Fotografering", "Klatring", "Matlaging", 
+                                        "Strikking/Hekling", "Musikk", "Lesing", "Sjakk", 
+                                        "Dans/sang", "Seiling", "Hiking", "Drivhus", "Motorsport", "Sport");
         setMargin(intrest3Combo, new Insets(0, 0, 50, 200));
         Label sexLabel = new Label("Sex");
         setMargin(sexLabel, new Insets(0, 0, 300, 200));
