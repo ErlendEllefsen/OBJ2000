@@ -25,18 +25,14 @@ class OptionsHeaderPane extends StackPane {
 
         register.setOnAction(e -> {
             getChildren().removeAll(register, login);
-           registerPressed();
+        
         });
-    }
-
-    private void registerPressed() {
-        Label name = new Label("name:");
-        TextField nameInput = new TextField();
-        nameInput.setPromptText("Enter your first name.");
-        nameInput.setPrefColumnCount(10);
-        nameInput.getText();
-        nameInput.setMaxWidth(50);
-        getChildren().addAll(name, nameInput);
+        register.setOnAction(e -> GUI.registerAction());
+        login.setOnAction(e -> {
+            getChildren().removeAll(register, login);
+        
+        });
+        login.setOnAction(e -> GUI.loginAction());
     }
     
 }
