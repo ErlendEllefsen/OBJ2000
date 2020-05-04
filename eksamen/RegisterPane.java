@@ -89,7 +89,9 @@ class RegisterPane extends StackPane {
         intrest3Combo.setMaxWidth(80);
         setStyle(
         "-fx-background-color: orange;");
+
+      
         
-        regBtn.setOnAction(e -> {});
+        regBtn.setOnAction(e -> GUI.registerDone());
     }
 }
