@@ -26,7 +26,7 @@ public class dbConn{
               PreparedStatement preparedStmt = conn.prepareStatement(query);
               preparedStmt.setString (1, "Per");
               preparedStmt.setInt    (2, 22);
-              preparedStmt.setInt    (3, 13588551);
+              preparedStmt.setInt    (3, 13588552);
               preparedStmt.setString (4, "Male");
               preparedStmt.setString (5, "Sport, Gaming, Spising");
               preparedStmt.setString (6, "Bø i Telemark");
