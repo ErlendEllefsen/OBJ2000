@@ -19,6 +19,7 @@ public class dbConn{
             try
             {
               kobleOpp();
+              Class.forName("org.sqlite.JDBC");
               
               //SQL SELECT query. 
 

@@ -1,16 +1,7 @@
 package eksamen;
 
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
-
-/* Bruk dette for å kjøre
-
-    javac RegisterQuery.java
-    java -classpath ".;sqlite-jdbc-3.23.1.jar" SearchMatch
-
-*/
 
 public class RegisterQurey {
     private static Connection conn = null;
@@ -39,5 +30,4 @@ public class RegisterQurey {
   System.err.println(e.getMessage());
 }
     } 
-}
 }
