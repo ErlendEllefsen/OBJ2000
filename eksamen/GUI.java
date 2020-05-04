@@ -27,7 +27,7 @@ public class GUI extends Application {
     public void start(Stage primaryStage) {
         pane = new BorderPane();
         pane.setTop(new HeaderPane(title, 50, 50));
-        pane.setCenter(new OptionsHeaderPane("register", "login"));
+        pane.setCenter(new OptionsHeaderPane("Register", "Login"));
         pane.setBottom(new FooterHeaderPane(info));
 
         Scene scene = new Scene(pane, 700, 700);
@@ -69,13 +69,13 @@ public class GUI extends Application {
 
     public static BorderPane backAction() {
         ((BorderPane) pane).setTop(new HeaderPane(title, 50, 50));
-        ((BorderPane) pane).setCenter(new OptionsHeaderPane("register", "login"));
+        ((BorderPane) pane).setCenter(new OptionsHeaderPane("Register", "Login"));
         ((BorderPane) pane).setBottom((new FooterHeaderPane(info)));
         ((BorderPane) pane).setLeft(null);
 		return null;
     }
     public static BorderPane registerDone(){
-        ((BorderPane) pane).setTop(new HeaderPane(title, 25, 30));
+        ((BorderPane) pane).setTop(new HeaderPane(title + " - Home Page", 25, 30));
         ((BorderPane) pane).setLeft(new Menu());
         ((BorderPane) pane).setCenter(new Output());
         ((BorderPane) pane).setBottom((new FooterMenuPane()));

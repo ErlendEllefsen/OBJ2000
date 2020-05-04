@@ -2,8 +2,6 @@ package eksamen;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 class OptionsHeaderPane extends StackPane {
@@ -21,8 +19,11 @@ class OptionsHeaderPane extends StackPane {
         login.setMinHeight(100);
         getChildren().addAll(register, login);
         setStyle(
-        "-fx-background-color: red;");
-
+            "-fx-background-color: orange;"+ 
+            "-fx-font-family: Courier New;"+
+            "-fx-font-weight: bold;"+
+            "-fx-font-size: 20;"
+            );
         register.setOnAction(e -> {
             getChildren().removeAll(register, login);
         

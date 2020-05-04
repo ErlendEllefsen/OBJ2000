@@ -1,13 +1,9 @@
 package eksamen;
 
-import java.util.ArrayList;
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
@@ -88,10 +84,29 @@ class RegisterPane extends StackPane {
         intrest3Combo.setPrefWidth(80);
         intrest3Combo.setMaxWidth(80);
         setStyle(
-        "-fx-background-color: orange;");
+            "-fx-background-color: orange;"+ 
+            "-fx-font-family: Courier New;"+
+            "-fx-font-weight: bold;"+
+            "-fx-font-size: 15;"
+            );
 
       
         
-        regBtn.setOnAction(e -> GUI.registerDone());
+        
+
+        regBtn.setOnAction(e -> {
+            String name = nameInput.getText();
+            String sexV = sexCombo.getValue();
+            String ageString = ageInput.getText().trim();
+            int age = Integer.parseInt(ageString);
+            String city = cityInput.getText();
+            String phone = phoneInput.getText();
+            String intrest1 = intrest1Combo.getValue();
+            String intrest2 = intrest2Combo.getValue();
+            String intrest3 = intrest3Combo.getValue();
+            NewFile file = new NewFile(name, sexV, age, city, phone, intrest1, intrest2, intrest3);
+            System.out.println("WRITE");
+            GUI.registerDone();
+        });
     }
 }
