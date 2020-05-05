@@ -1,9 +1,16 @@
 package eksamen;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Query {
     private Connection connect() {
@@ -17,8 +24,11 @@ public class Query {
         }
         return conn;
     }
-    public void insert(String name, int age, int phone, String sex, String intrest1, String intrest2, String intrest3, String city) {
-        String sql = "INSERT INTO users(name, age, phone, sex, interest1, interest2, interest3, city) VALUES(?,?,?,?,?,?,?, ?)";
+    public void insert(String name, int age, int phone, 
+                       String sex, String intrest1, String intrest2, 
+                       String intrest3, String city) {
+        String sql = 
+        "INSERT INTO users(name, age, phone, sex, interest1, interest2, interest3, city) VALUES(?,?,?,?,?,?,?, ?)";
 
         try (Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -32,7 +42,46 @@ public class Query {
             pstmt.setString(8, city);
             pstmt.executeUpdate();
             conn.close();
+            login(phone);
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void writeFile(int Id, int phone){
+        try
+        { 
+            String phoneString = new Integer(phone).toString();
+            Files.deleteIfExists(Paths.get(phoneString+".txt")); 
+            System.out.println("Deletion successful."); 
+        } 
+        catch(NoSuchFileException e) 
+        { 
+            System.out.println("No such file/directory exists"); 
+        } 
+        catch(IOException e) 
+        { 
+            System.out.println("Invalid permissions."); 
+        } 
+        
+        try{
+            FileWriter writer = new FileWriter(phone+".txt", true);
+            writer.write(new Integer(Id).toString());
+            writer.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void login(int phone){
+        String sql = "SELECT ID FROM Users WHERE phone="+phone;
+        int id;
+        try (
+            Connection conn = this.connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){
+            id = rs.getInt("id");
+            conn.close();
+            writeFile(id, phone);
+        }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
