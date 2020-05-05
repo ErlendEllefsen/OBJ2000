@@ -112,13 +112,15 @@ public class Query {
               System.err.println(e.getMessage());
             }
     }
-    public void fillTable(int minAge, int maxAge, String sex) throws SQLException {
+    public void fillTable(int minAge, int maxAge, String sex, int phone) throws SQLException {
+
         List<Integer> ageList = new ArrayList<Integer>();
         List<String> sexList = new ArrayList<String>();
         List<String> interest1List = new ArrayList<String>();
         List<String> interest2List = new ArrayList<String>();
         List<String> interest3List = new ArrayList<String>();
-        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3 FROM Users";
+        List<Integer> idList = new ArrayList<Integer>();
+        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3, ID FROM Users WHERE Age BETWEEN " + minAge + " AND " + maxAge + " AND Sex="+"'"+ sex +"'";
         Connection conn = this.connect();
         Statement stmt  = conn.createStatement();
         try {
@@ -126,14 +128,33 @@ public class Query {
             while (rs.next()) {
                 ageList.add(rs.getInt(1));
                 sexList.add(rs.getString(2));
+                interest1List.add(rs.getString(3));
+                interest2List.add(rs.getString(4));
+                interest3List.add(rs.getString(5));
+                idList.add(rs.getInt(6));
             }
-            System.out.println(ageList);
-            System.out.println(sexList);
+            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList);
         }finally {
             stmt.close();}
         }
+    public List<String> getInterests(int phone) throws SQLException {
+        List<String> userInterests = new ArrayList<String>();
+        String sql = "";
+        Connection conn = this.connect();
+        Statement stmt  = conn.createStatement();
+        try {
+            ResultSet rs    = stmt.executeQuery(sql);
+            while (rs.next()) {
 
 
+            }
+        }finally {
+            stmt.close();
+        }
+
+        return userInterests;
+
+    }
 
     public void getID(int phone){
         String line;

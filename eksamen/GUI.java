@@ -3,7 +3,8 @@ package eksamen;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -77,7 +78,6 @@ public class GUI extends Application {
     public static BorderPane registerDone(int phone){
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Home Page", 25, 30));
         ((BorderPane) pane).setLeft(new Menu(phone));
-        ((BorderPane) pane).setCenter(new Output());
         ((BorderPane) pane).setBottom((new FooterMenuPane()));
         return null;
     }
@@ -88,6 +88,10 @@ public class GUI extends Application {
     }
     public static BorderPane logsAction(String logsName){
         ((BorderPane) pane).setRight((new LogsPane(logsName)));
+        return null;
+    }
+    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList){
+        ((BorderPane) pane).setCenter((new Output(ageList, sexList, interest1List, interes2List, interest3List, idList)));
         return null;
     }
 

@@ -1,11 +1,6 @@
 package eksamen;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import java.util.List;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,13 +13,14 @@ import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
     
-    Output(){
+    Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList){
         TableView<Person> table = new TableView<Person>();
         
         ObservableList<Person> data = FXCollections.observableArrayList();
-        
-        data.addAll(FXCollections.observableArrayList(new Person(0, 0,"Oman", "Fisking", "Soving", "Sport")));
-    
+        for (int element = 0; element<ageList.size();element++) {
+            data.addAll(FXCollections.observableArrayList(new Person(idList.get(element), ageList.get(element),sexList.get(element), interestList1.get(element), interestList2.get(element), interestList3.get(element))));
+        }
+       
         TableColumn<Person, Integer> ageCol = new TableColumn<>("Age");
         ageCol.setMinWidth(100);
         ageCol.setCellValueFactory(

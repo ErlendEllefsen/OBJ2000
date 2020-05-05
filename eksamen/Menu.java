@@ -23,7 +23,7 @@ class Menu extends StackPane {
         label.setTextFill(Color.web("#000000", 0.8));
         setMargin(sliderLabel, new Insets(0, 0, 325, 0));
         Slider minSlider = new Slider(18, 40, 1);
-        minSlider.setShowTickMarks(true);
+        minSlider.setShowTickMarks(false);
         minSlider.setShowTickLabels(true);
         minSlider.setMajorTickUnit(1);
         minSlider.setBlockIncrement(1);
@@ -51,11 +51,12 @@ class Menu extends StackPane {
 
         btnSearch.setOnAction(e -> {
             int minAge = (int) minSlider.getValue();
-            int maxAge = (int) minSlider.getValue();
+            int maxAge = (int) maxSlider.getValue();
+            System.out.println(minAge+ "   "+maxAge);
             String sexV = sexCombo.getValue();
             Query query = new Query();
             try {
-                query.fillTable(minAge, maxAge, sexV);
+                query.fillTable(minAge, maxAge, sexV, phone);
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
