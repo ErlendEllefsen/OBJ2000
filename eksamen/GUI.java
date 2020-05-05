@@ -75,11 +75,15 @@ public class GUI extends Application {
         ((BorderPane) pane).setLeft(null);
 		return null;
     }
-    public static BorderPane registerDone(){
+    public static BorderPane registerDone(int phone){
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Home Page", 25, 30));
-        ((BorderPane) pane).setLeft(new Menu());
+        ((BorderPane) pane).setLeft(new Menu(phone));
         ((BorderPane) pane).setCenter(new Output());
         ((BorderPane) pane).setBottom((new FooterMenuPane()));
+        return null;
+    }
+    public static BorderPane logsAction(String logsName){
+        ((BorderPane) pane).setRight((new LogsPane(logsName)));
         return null;
     }
 
