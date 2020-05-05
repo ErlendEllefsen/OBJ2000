@@ -1,5 +1,8 @@
 package eksamen;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -13,12 +16,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
-    private TableView<Person> table = new TableView<Person>();
-    private final ObservableList<Person> data =
-        FXCollections.observableArrayList(
-            new Person(20,"Male", "Fisking", "Soving", "Sport")
-        );
+    
     Output(){
+        TableView<Person> table = new TableView<Person>();
+        
+        ObservableList<Person> data = FXCollections.observableArrayList();
+        
+        data.addAll( FXCollections.observableArrayList(new Person(0, "Oman", "Fisking", "Soving", "Sport")));
+    
         TableColumn<Person, Integer> ageCol = new TableColumn<>("Age");
         ageCol.setMinWidth(100);
         ageCol.setCellValueFactory(
@@ -45,10 +50,11 @@ class Output extends StackPane {
                 new PropertyValueFactory<Person, String>("interest3"));
 
         table.setItems(data);
-
+        
         table.getColumns().addAll(ageCol, sexCol, interest1Col, interest2Col, interest3Col);
 
         getChildren().addAll(table);
+        table.getSortOrder().add(ageCol);
         
         setStyle(
         "-fx-background-color: white;");

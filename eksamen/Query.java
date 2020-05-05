@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -81,9 +83,30 @@ public class Query {
             id = rs.getInt("id");
             conn.close();
             writeFile(id, phone);
+            stmt.close();
+            rs.close();
         }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    
+    public void fillTable(int minAge, int maxAge, String sex) throws SQLException {
+        List<Integer> ageList = new ArrayList<Integer>();
+        List<String> sexList = new ArrayList<String>();
+        List<String> interest1List = new ArrayList<String>();
+        List<String> interest2List = new ArrayList<String>();
+        List<String> interest3List = new ArrayList<String>();
+        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3 FROM Users";
+        Connection conn = this.connect();
+        Statement stmt  = conn.createStatement();
+        try {
+            ResultSet rs    = stmt.executeQuery(sql);
+            while (rs.next()) {
+                ageList.add(rs.getInt(1));
+                sexList.add(rs.getString(2));
+            }
+            System.out.println(ageList);
+            System.out.println(sexList);
+        }finally {
+            stmt.close();}
+        }
 }
