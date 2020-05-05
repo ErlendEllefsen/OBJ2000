@@ -16,30 +16,37 @@ class Output extends StackPane {
     private TableView<Person> table = new TableView<Person>();
     private final ObservableList<Person> data =
         FXCollections.observableArrayList(
-            new Person("Jacob", "Smith", "jacob.smith@example.com"),
-            new Person("Isabella", "Johnson", "isabella.johnson@example.com"),
-            new Person("Ethan", "Williams", "ethan.williams@example.com"),
-            new Person("Emma", "Jones", "emma.jones@example.com"),
-            new Person("Michael", "Brown", "michael.brown@example.com")
+            new Person(20,"Male", "Fisking", "Soving", "Sport")
         );
     Output(){
-       
-
-        TableColumn<Person, String> firstNameCol = new TableColumn<>("First Name");
-        firstNameCol.setMinWidth(100);
-        firstNameCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("firstName"));
-        TableColumn<Person, String> lastNameCol = new TableColumn<>("Last Name");
-        lastNameCol.setMinWidth(100);
-        lastNameCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("lastName"));
-        TableColumn<Person, String> ageCol = new TableColumn<>("Age");
+        TableColumn<Person, Integer> ageCol = new TableColumn<>("Age");
         ageCol.setMinWidth(100);
         ageCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("age"));
+                new PropertyValueFactory<Person, Integer>("age"));
+
+        TableColumn<Person, String> sexCol = new TableColumn<>("Sex");
+        sexCol.setMinWidth(100);
+        sexCol.setCellValueFactory(
+                new PropertyValueFactory<Person, String>("sex"));
+
+        TableColumn<Person, String> interest1Col = new TableColumn<>("Interest 1");
+        interest1Col.setMinWidth(100);
+        interest1Col.setCellValueFactory(
+                new PropertyValueFactory<Person, String>("interest1"));
+        
+        TableColumn<Person, String> interest2Col = new TableColumn<>("Interest 2");
+        interest2Col.setMinWidth(100);
+        interest2Col.setCellValueFactory(
+                new PropertyValueFactory<Person, String>("interest2"));
+
+        TableColumn<Person, String> interest3Col = new TableColumn<>("Interest 3");
+        interest3Col.setMinWidth(100);
+        interest3Col.setCellValueFactory(
+                new PropertyValueFactory<Person, String>("interest3"));
+
         table.setItems(data);
 
-        table.getColumns().addAll(firstNameCol, lastNameCol, ageCol);
+        table.getColumns().addAll(ageCol, sexCol, interest1Col, interest2Col, interest3Col);
 
         getChildren().addAll(table);
         
@@ -47,35 +54,39 @@ class Output extends StackPane {
         "-fx-background-color: white;");
     }
     public static class Person {
-        private final SimpleStringProperty firstName;
-        private final SimpleStringProperty lastName;
-        private final SimpleStringProperty age;
+        private final SimpleIntegerProperty age;
+        private final SimpleStringProperty sex;
+        private final SimpleStringProperty interest1;
+        private final SimpleStringProperty interest2;
+        private final SimpleStringProperty interest3;
      
-        private Person(String fName, String lName, String age) {
-            this.firstName = new SimpleStringProperty(fName);
-            this.lastName = new SimpleStringProperty(lName);
-            this.age = new SimpleStringProperty(age);
+        private Person(Integer age, String sex, String interest1, String interest2, String interest3) {
+            this.age = new SimpleIntegerProperty(age);
+            this.sex = new SimpleStringProperty(sex);
+            this.interest1 = new SimpleStringProperty(interest1);
+            this.interest2 = new SimpleStringProperty(interest2);
+            this.interest3 = new SimpleStringProperty(interest3);
+
         }
      
-        public String getFirstName() {
-            return firstName.get();
-        }
-        public void setFirstName(String fName) {
-            firstName.set(fName);
-        }
-            
-        public String getLastName() {
-            return lastName.get();
-        }
-        public void setLastName(String fName) {
-            lastName.set(fName);
-        }
-        
-        public String getAge() {
+        public Integer getAge() {
             return age.get();
         }
-        public void setEmail(String fName) {
-            age.set(fName);
+            
+        public String getSex() {
+            return sex.get();
+        }
+        
+        public String getInterest1() {
+            return interest1.get();
+        }
+
+        public String getInterest2() {
+            return interest2.get();
+        }
+
+        public String getInterest3() {
+            return interest3.get();
         }
             
     }
