@@ -2,9 +2,7 @@ package eksamen;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 class BackPane extends StackPane {
     BackPane(String back){
