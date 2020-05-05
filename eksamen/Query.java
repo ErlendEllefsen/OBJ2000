@@ -139,13 +139,15 @@ public class Query {
         }
     public List<String> getInterests(int phone) throws SQLException {
         List<String> userInterests = new ArrayList<String>();
-        String sql = "";
+        String sql = "SELECT Interest1, Interest2, Interest3 FROM Users Where phone="+phone;
         Connection conn = this.connect();
         Statement stmt  = conn.createStatement();
         try {
             ResultSet rs    = stmt.executeQuery(sql);
             while (rs.next()) {
-
+                userInterests.add(rs.getString(1));
+                userInterests.add(rs.getString(2));
+                userInterests.add(rs.getString(3));
 
             }
         }finally {
