@@ -93,16 +93,17 @@ public class Query {
         }
 
     }
-    public void searchResult (int ID_give) {
+    public void searchResult (int ID_give, int phone) {
         try {
             String sql = "SELECT * FROM Users WHERE ID="+ID_give;
             Connection conn = this.connect();
             Statement stmt  = conn.createStatement();
             ResultSet rs    = stmt.executeQuery(sql); 
+            int userID = getLogged(phone);
             while(rs.next()) {
                 String name = rs.getString("name");
-                String phone = rs.getString("phone");
-                GUI.searchAction(name, phone);
+                String phoneString = rs.getString("phone");
+                GUI.searchAction(name, phoneString);
             }
             stmt.close();
         }
@@ -111,6 +112,25 @@ public class Query {
               System.err.println("EXCEPTION");
               System.err.println(e.getMessage());
             }
+    }
+    public int getLogged(int phone){
+        int userID = 0;
+
+        try {
+            String sql = "";
+            Connection conn = this.connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql); 
+            
+            while(rs.next()) {
+                
+            }
+            stmt.close();
+        }
+        catch (Exception e){
+
+        }
+        return userID;
     }
     public void fillTable(int minAge, int maxAge, String sex, int phone) throws SQLException {
 
@@ -133,7 +153,7 @@ public class Query {
                 interest3List.add(rs.getString(5));
                 idList.add(rs.getInt(6));
             }
-            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList);
+            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone);
         }finally {
             stmt.close();}
         }

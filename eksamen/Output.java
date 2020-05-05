@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
     
-    Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList){
+    Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList, int phone){
         TableView<Person> table = new TableView<Person>();
         
         ObservableList<Person> data = FXCollections.observableArrayList();
@@ -63,7 +63,7 @@ class Output extends StackPane {
             row.setOnMouseClicked(event -> {
                 int ID_give = table.getSelectionModel().getSelectedItem().getId();
                 Query query = new Query();
-                query.searchResult(ID_give);
+                query.searchResult(ID_give, phone);
             });
             return row;
         });
