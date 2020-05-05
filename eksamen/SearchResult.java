@@ -2,9 +2,16 @@ package eksamen;
 
 import java.util.Optional;
 
+import javafx.geometry.Orientation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 class SearchResult extends StackPane {
@@ -17,9 +24,28 @@ class SearchResult extends StackPane {
 
         Optional<ButtonType> result = infoAlert.showAndWait();
         if (result.get() == ButtonType.OK){
-            // ... user chose OK
+            Label headerLabel = new Label("User Info");
+            String infoName = new String (name);
+            String nameToLabel = "Name: " + infoName;
+
+            String infoPhone = new String (phone);
+            String phoneToLabel = "Phone: " + infoPhone;
+
+            Label nameLabel = new Label(nameToLabel);
+            Label phoneLabel = new Label(phoneToLabel);
+            
+            FlowPane flowInfo = new FlowPane(Orientation.VERTICAL, 15.0,5.0,headerLabel, nameLabel, phoneLabel);
+
+            getChildren().add(flowInfo);   
+        
+        setStyle(
+        "-fx-background-color: blue;" + 
+        "-fx-font-family: Courier New;"+
+        "-fx-font-weight: bold;"+
+        "-fx-font-size: 20;"
+        );
         } else {
-            // ... user chose CANCEL or closed the dialog
+            //Nothing happens, go back.
         }
     }
 }

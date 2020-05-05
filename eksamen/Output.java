@@ -23,7 +23,7 @@ class Output extends StackPane {
         
         ObservableList<Person> data = FXCollections.observableArrayList();
         
-        data.addAll(FXCollections.observableArrayList(new Person(0, 0,"Oman", "Fisking", "Soving", "Sport")));
+        data.addAll(FXCollections.observableArrayList(new Person(2, 20,"Oman", "Fisking", "Soving", "Sport")));
     
         TableColumn<Person, Integer> ageCol = new TableColumn<>("Age");
         ageCol.setMinWidth(100);
