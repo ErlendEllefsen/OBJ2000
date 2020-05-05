@@ -1,5 +1,7 @@
 package eksamen;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -88,6 +91,26 @@ public class Query {
         }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
+    }
+    public void searchResult (int ID_give) {
+        try {
+            String sql = "SELECT * FROM Users WHERE ID="+ID_give;
+            Connection conn = this.connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql); 
+            while(rs.next()) {
+                String name = rs.getString("name");
+                String phone = rs.getString("phone");
+                GUI.searchAction(name, phone);
+            }
+            stmt.close();
+        }
+        catch (Exception e)
+            {
+              System.err.println("EXCEPTION");
+              System.err.println(e.getMessage());
+            }
     }
     public void fillTable(int minAge, int maxAge, String sex) throws SQLException {
         List<Integer> ageList = new ArrayList<Integer>();
@@ -109,4 +132,45 @@ public class Query {
         }finally {
             stmt.close();}
         }
-}
+
+
+
+    public void getID(int phone){
+        String line;
+            int logsId;
+            String logsName;
+            String sql;
+        try {
+          
+            BufferedReader in = new BufferedReader(new FileReader(phone+".txt")); 
+               while((line = in.readLine()) != null){
+               
+                sql = "SELECT INFO_reciveID FROM info_exchange Where INFO_giveID ="+line;
+               
+               
+                    Connection conn = this.connect();
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql);
+                        logsId = rs.getInt("INFO_reciveID");
+                    
+                    
+                    String sql2 = "SELECT name FROM users Where ID="+logsId;
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery(sql2);
+                        logsName = rs2.getString("name");
+                    GUI.logsAction(logsName);    
+                 conn.close();
+                }
+                in.close();
+                 
+               
+                
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+               }
+               
+            }    
+        }     
+
+
+

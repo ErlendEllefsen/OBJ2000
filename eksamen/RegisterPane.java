@@ -103,7 +103,7 @@ class RegisterPane extends StackPane {
             String intrest3 = intrest3Combo.getValue();
             Query query = new Query();
             query.insert(name, age, phone, sexV, intrest1, intrest2, intrest3, city);
-            GUI.registerDone();
+            GUI.registerDone(phone);
         });
     }
 }

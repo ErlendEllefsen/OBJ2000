@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 class Menu extends StackPane {
-    Menu() {
+    Menu(int phone){
 
         String[] sex = { "Woman", "Man" };
 
@@ -60,7 +60,11 @@ class Menu extends StackPane {
                 e1.printStackTrace();
             }
         });
-        btnLogs.setOnAction(e->{});
+        btnLogs.setOnAction(e->{
+            Query gg = new Query();
+            gg.getID(phone);
+        });
+
     }
     
 }
