@@ -16,8 +16,7 @@ public class GUI extends Application {
     public static void main(String[] args) {
         kobleOpp();
         kobleNed();
-        launch(args);
-        
+        launch(args);    
     }
 
     private static BorderPane pane;
@@ -85,11 +84,6 @@ public class GUI extends Application {
     public static BorderPane logsAction(String logsName){
         ((BorderPane) pane).setRight((new LogsPane(logsName)));
         return null;
-    }
-
-    public static BorderPane searchAction(int ID_Give) {
-        ((BorderPane) pane).setRight(new SearchResult(ID_Give));
-        return null; 
     }
 
     
