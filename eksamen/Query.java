@@ -1,5 +1,7 @@
 package eksamen;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -84,6 +87,7 @@ public class Query {
         }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }
     public void searchResult (int ID_give) {
         try {
@@ -104,4 +108,44 @@ public class Query {
               System.err.println(e.getMessage());
             }
     }
-}
+
+
+    public void getID(int phone){
+        String line;
+            int logsId;
+            String logsName;
+            String sql;
+        try {
+          
+            BufferedReader in = new BufferedReader(new FileReader(phone+".txt")); 
+               while((line = in.readLine()) != null){
+               
+                sql = "SELECT INFO_reciveID FROM info_exchange Where INFO_giveID ="+line;
+               
+               
+                    Connection conn = this.connect();
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql);
+                        logsId = rs.getInt("INFO_reciveID");
+                    
+                    
+                    String sql2 = "SELECT name FROM users Where ID="+logsId;
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery(sql2);
+                        logsName = rs2.getString("name");
+                    GUI.logsAction(logsName);    
+                 conn.close();
+                }
+                in.close();
+                 
+               
+                
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+               }
+               
+            }    
+        }     
+
+
+

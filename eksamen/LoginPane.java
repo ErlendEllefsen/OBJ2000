@@ -27,7 +27,7 @@ class LoginPane extends StackPane {
             int phone = Integer.parseInt(phoneString);
             Query query = new Query();
             query.login(phone);
-            GUI.registerDone();
+            GUI.registerDone(phone);
         });
     }
 }

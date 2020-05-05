@@ -16,8 +16,7 @@ public class GUI extends Application {
     public static void main(String[] args) {
         kobleOpp();
         kobleNed();
-        launch(args);
-        
+        launch(args);    
     }
 
     private static BorderPane pane;
@@ -75,9 +74,9 @@ public class GUI extends Application {
         ((BorderPane) pane).setLeft(null);
 		return null;
     }
-    public static BorderPane registerDone(){
+    public static BorderPane registerDone(int phone){
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Home Page", 25, 30));
-        ((BorderPane) pane).setLeft(new Menu());
+        ((BorderPane) pane).setLeft(new Menu(phone));
         ((BorderPane) pane).setCenter(new Output());
         ((BorderPane) pane).setBottom((new FooterMenuPane()));
         return null;
@@ -86,6 +85,10 @@ public class GUI extends Application {
     public static BorderPane searchAction(String name, String phone) {
         ((BorderPane) pane).setRight(new SearchResult(name, phone));
         return null; 
+    }
+    public static BorderPane logsAction(String logsName){
+        ((BorderPane) pane).setRight((new LogsPane(logsName)));
+        return null;
     }
 
     
