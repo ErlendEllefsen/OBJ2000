@@ -85,5 +85,21 @@ public class Query {
             System.out.println(e.getMessage());
         }
     }
-    
+    public void SearchResult (int ID_give) {
+        String sql = "SELECT * FROM Users WHERE id="+ID_give;
+        String name;
+        String phone;
+        try ( 
+            Connection conn = this.connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){
+                name = rs.getString("name");
+                phone = rs.getString("phone");
+                conn.close();
+                System.out.println(name);
+                System.out.println(phone);
+            }catch (SQLException e) {
+                System.out.println(e.getMessage()); 
+            }
+    }
 }

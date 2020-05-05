@@ -83,5 +83,10 @@ public class GUI extends Application {
         return null;
     }
 
+    public static BorderPane searchAction(int ID_Give) {
+        ((BorderPane) pane).setRight(new SearchResult(ID_Give));
+        return null; 
+    }
+
     
 }
