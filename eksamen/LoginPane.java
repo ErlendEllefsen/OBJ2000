@@ -1,5 +1,6 @@
 package eksamen;
 
+import java.sql.Connection;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,5 +23,12 @@ class LoginPane extends StackPane {
         "-fx-font-weight: bold;"+
         "-fx-font-size: 20;"
         );
+        btnLogin.setOnAction(e -> {
+            InsertTest test = new InsertTest();
+        // insert three new rows
+            test.insert("Erlend");
+            test.insert("Robin");
+            test.insert("Jon");
+        });
     }
 }

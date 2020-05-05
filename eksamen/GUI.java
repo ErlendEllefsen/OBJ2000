@@ -10,13 +10,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
  
 public class GUI extends Application {
-    private static String url = "jdbc:sqlite:DateMe.db";
+    private static String url = "jdbc:sqlite:./db/DateMe.db";
     private static Connection conn = null;
 
     public static void main(String[] args) {
         kobleOpp();
-        launch(args);
         kobleNed();
+        launch(args);
+        
     }
 
     private static BorderPane pane;

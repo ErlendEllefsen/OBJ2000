@@ -90,21 +90,27 @@ class RegisterPane extends StackPane {
             "-fx-font-size: 15;"
             );
 
-      
-        
-        
-
         regBtn.setOnAction(e -> {
             String name = nameInput.getText();
             String sexV = sexCombo.getValue();
             String ageString = ageInput.getText().trim();
             int age = Integer.parseInt(ageString);
             String city = cityInput.getText();
-            String phone = phoneInput.getText();
+            String phoneString = phoneInput.getText();
+            int phone = Integer.parseInt(phoneString);
             String intrest1 = intrest1Combo.getValue();
             String intrest2 = intrest2Combo.getValue();
             String intrest3 = intrest3Combo.getValue();
-            NewFile file = new NewFile(name, sexV, age, city, phone, intrest1, intrest2, intrest3);
+            System.out.println(name);
+            System.out.println(sexV);
+            System.out.println(age);
+            System.out.println(city);
+            System.out.println(phone);
+            System.out.println(intrest1);
+            System.out.println(intrest2);
+            System.out.println(intrest3);
+            Query query = new Query();
+            query.insert(name, age, phone, sexV, intrest1, intrest2, intrest3, city);
             System.out.println("WRITE");
             GUI.registerDone();
         });
