@@ -85,21 +85,23 @@ public class Query {
             System.out.println(e.getMessage());
         }
     }
-    public void SearchResult (int ID_give) {
-        String sql = "SELECT * FROM Users WHERE id="+ID_give;
-        String name;
-        String phone;
-        try ( 
+    public void searchResult (int ID_give) {
+        try {
+            String sql = "SELECT * FROM Users WHERE ID="+ID_give;
             Connection conn = this.connect();
             Statement stmt  = conn.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql)){
-                name = rs.getString("name");
-                phone = rs.getString("phone");
-                conn.close();
-                System.out.println(name);
-                System.out.println(phone);
-            }catch (SQLException e) {
-                System.out.println(e.getMessage()); 
+            ResultSet rs    = stmt.executeQuery(sql); 
+            while(rs.next()) {
+                String name = rs.getString("name");
+                String phone = rs.getString("phone");
+                GUI.searchAction(name, phone);
+            }
+            stmt.close();
+        }
+        catch (Exception e)
+            {
+              System.err.println("EXCEPTION");
+              System.err.println(e.getMessage());
             }
     }
 }

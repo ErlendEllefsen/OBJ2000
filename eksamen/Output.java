@@ -1,8 +1,5 @@
 package eksamen;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -67,7 +64,8 @@ class Output extends StackPane {
             TableRow<Person> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 int ID_give = table.getSelectionModel().getSelectedItem().getId();
-                GUI.searchAction(ID_give);
+                Query query = new Query();
+                query.searchResult(ID_give);
             });
             return row;
         });
