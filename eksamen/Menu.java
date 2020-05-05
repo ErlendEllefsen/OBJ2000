@@ -53,7 +53,12 @@ class Menu extends StackPane {
         );
         setPadding(new Insets(0,10,0,10));
 
-        btnSearch.setOnAction(e->{});
+        btnSearch.setOnAction(e->{
+            int minAge = (int) minSlider.getValue();
+            int maxAge = (int) minSlider.getValue();
+            String sexV = sexCombo.getValue();
+            System.out.println(minAge + maxAge + sexV);
+        });
         btnLogs.setOnAction(e->{});
     }
     
