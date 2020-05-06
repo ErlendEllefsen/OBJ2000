@@ -9,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 class Menu extends StackPane {
-    private static final int Integer = 0;
 
 	Menu(int phone) {
 

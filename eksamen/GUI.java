@@ -16,7 +16,7 @@ public class GUI extends Application {
         deleteFile file = new deleteFile();
         System.out.println(file);
     }
-
+    
     private static BorderPane pane;
     static String title = "DateMe";
     static String info = "DateMe. For You By Us.";
