@@ -1,5 +1,6 @@
 package eksamen;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
  
@@ -25,7 +26,7 @@ class NewFile {
             writer.write("\r\n");   
             writer.write(intrest3);
             writer.close();
-        } catch (IOException e) {
+    } catch (IOException e) {
             e.printStackTrace();
         }
     }
