@@ -81,10 +81,11 @@ public class GUI extends Application {
         return null;
     }
 
-    public static BorderPane searchAction(String name, String phone) {
-        ((BorderPane) pane).setRight(new SearchResult(name, phone));
+    public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give) {
+        ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give));
         return null; 
     }
+    
     public static BorderPane logsAction(String logsName){
         ((BorderPane) pane).setRight((new LogsPane(logsName)));
         return null;

@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -84,11 +83,12 @@ public class Query {
             Statement stmt  = conn.createStatement();
             ResultSet rs    = stmt.executeQuery(sql)){
             id = rs.getInt("id");
-            conn.close();
             writeFile(id, phone);
             stmt.close();
             rs.close();
+            conn.close();
         }catch (SQLException e) {
+            System.out.println("Error i login");
             System.out.println(e.getMessage());
         }
 
@@ -99,38 +99,69 @@ public class Query {
             Connection conn = this.connect();
             Statement stmt  = conn.createStatement();
             ResultSet rs    = stmt.executeQuery(sql); 
-            int userID = getLogged(phone);
+            int yourID = getLogged(phone);
             while(rs.next()) {
                 String name = rs.getString("name");
                 String phoneString = rs.getString("phone");
-                GUI.searchAction(name, phoneString);
+                GUI.searchAction(name, phoneString, yourID, ID_give);
+                rs.close();
             }
             stmt.close();
+            conn.close();
+            
+            
         }
         catch (Exception e)
             {
-              System.err.println("EXCEPTION");
+              System.err.println("searchResult Error");
               System.err.println(e.getMessage());
             }
     }
     public int getLogged(int phone){
-        int userID = 0;
-
+        int yourID = 0;
         try {
-            String sql = "";
+            String sql = "SELECT ID FROM Users WHERE phone="+phone;
             Connection conn = this.connect();
             Statement stmt  = conn.createStatement();
             ResultSet rs    = stmt.executeQuery(sql); 
             
             while(rs.next()) {
+                yourID = rs.getInt("id");
                 
             }
-            stmt.close();
+
+            rs.close();   
+            conn.close();
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
+            System.err.println("getLogged Error");
+            System.err.println(e.getMessage());
+        }
+        return yourID;
+        
+    }
+
+    public void sendId(int yourID, int ID_give) {
+        String sql = "INSERT INTO infoexchange(inforeciveid, infogiveid) VALUES(?,?)";
+        try (Connection conn = this.connect();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, yourID);
+        stmt.setInt(2, ID_give);
+        stmt.executeUpdate();
+        stmt.close();
+        conn.close();
+        System.out.println(yourID);
+        System.out.println(ID_give);
 
         }
-        return userID;
+        
+        
+        catch (SQLException e)
+        {
+            System.err.println("SendID Error");
+            System.out.println(e.getMessage());
+        }
     }
     public void fillTable(int minAge, int maxAge, String sex, int phone) throws SQLException {
 
@@ -155,8 +186,10 @@ public class Query {
             }
             GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone);
         }finally {
-            stmt.close();}
+            stmt.close();
+            conn.close();
         }
+    }
     public List<String> getInterests(int phone) throws SQLException {
         List<String> userInterests = new ArrayList<String>();
         String sql = "SELECT Interest1, Interest2, Interest3 FROM Users Where phone="+phone;
@@ -168,13 +201,15 @@ public class Query {
                 userInterests.add(rs.getString(1));
                 userInterests.add(rs.getString(2));
                 userInterests.add(rs.getString(3));
-
+                
             }
+            rs.close();
+            return userInterests;
         }finally {
             stmt.close();
+            conn.close();
         }
-
-        return userInterests;
+        
 
     }
 
@@ -195,20 +230,26 @@ public class Query {
                     Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(sql);
                         logsId = rs.getInt("INFO_reciveID");
-                    
+                        stmt.close();
+                        rs.close();
                     
                     String sql2 = "SELECT name FROM users Where ID="+logsId;
                     Statement stmt2 = conn.createStatement();
                     ResultSet rs2 = stmt2.executeQuery(sql2);
                         logsName = rs2.getString("name");
                     GUI.logsAction(logsName);    
+                 
+                 stmt2.close();
+                 rs2.close();
                  conn.close();
                 }
                 in.close();
+
                  
                
                 
             }catch (Exception e){
+                System.out.println("Error i GETID");
                 System.out.println(e.getMessage());
                }
                
