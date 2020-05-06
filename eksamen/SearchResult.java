@@ -1,5 +1,6 @@
 package eksamen;
 
+import java.sql.Connection;
 import java.util.Optional;
 
 import javafx.geometry.Orientation;
@@ -11,7 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 
 class SearchResult extends StackPane {
-    SearchResult(String name, String phone, Integer yourID, Integer ID_give){
+    SearchResult(String name, String phone, Integer yourID, Integer ID_give, Connection conn){
 
         Alert infoAlert = new Alert(AlertType.CONFIRMATION);
         infoAlert.setTitle("Get information");
@@ -21,7 +22,7 @@ class SearchResult extends StackPane {
         Optional<ButtonType> result = infoAlert.showAndWait();
             if (result.get() == ButtonType.OK){
                 Query sendID = new Query();
-                sendID.sendId(yourID, ID_give); 
+                sendID.sendId(yourID, ID_give, conn); 
                 {
                     Label headerLabel = new Label("User Info");
                     String infoName = new String (name);
