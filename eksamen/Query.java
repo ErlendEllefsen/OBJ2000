@@ -385,6 +385,3 @@ public class Query {
     }
          
             
-
-
-

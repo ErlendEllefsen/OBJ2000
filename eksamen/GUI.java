@@ -10,7 +10,9 @@ import javafx.stage.Stage;
 public class GUI extends Application {
 
     public static void main(String[] args) {
-        launch(args);    
+        launch(args);   
+        deleteFile file = new deleteFile();
+        System.out.println(file);
     }
 
     private static BorderPane pane;
