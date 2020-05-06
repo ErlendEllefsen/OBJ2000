@@ -1,16 +1,17 @@
 package eksamen;
 
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
- 
+
 public class GUI extends Application {
 
     public static void main(String[] args) {
-        launch(args);   
+        launch(args);
         deleteFile file = new deleteFile();
         System.out.println(file);
     }
@@ -33,6 +34,7 @@ public class GUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
     public static BorderPane registerAction() {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Register", 50, 50));
         ((BorderPane) pane).setCenter(new RegisterPane());
@@ -54,9 +56,10 @@ public class GUI extends Application {
         ((BorderPane) pane).setBottom((new FooterHeaderPane(info)));
         ((BorderPane) pane).setLeft(null);
         ((BorderPane) pane).setRight(null);
-		return null;
+        return null;
     }
-    public static BorderPane registerDone(int phone){
+
+    public static BorderPane registerDone(int phone) {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Home Page", 25, 30));
         ((BorderPane) pane).setLeft(new Menu(phone));
         ((BorderPane) pane).setCenter(null);
@@ -64,7 +67,8 @@ public class GUI extends Application {
         return null;
     }
 
-    public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give, Connection conn) {
+    public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give, Connection conn)
+            throws FileNotFoundException {
         ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give, conn));
         return null; 
     }
@@ -72,8 +76,8 @@ public class GUI extends Application {
         ((BorderPane) pane).setRight((new LogsPane(logsName, logsPhone)));
         return null;
     }
-    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList){
-        ((BorderPane) pane).setCenter((new Output(ageList, sexList, interest1List, interes2List, interest3List, idList, phone, ratingList)));
+    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList, int amountofMatches){
+        ((BorderPane) pane).setCenter((new Output(ageList, sexList, interest1List, interes2List, interest3List, idList, phone, ratingList, amountofMatches)));
         return null;
     }
 

@@ -1,5 +1,7 @@
 package eksamen;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.util.Optional;
 
@@ -9,12 +11,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 
 class SearchResult extends StackPane {
-    SearchResult(String name, String phone, Integer yourID, Integer ID_give, Connection conn){
+    SearchResult(String name, String phone, Integer yourID, Integer ID_give, Connection conn)
+            throws FileNotFoundException {
 
         Alert infoAlert = new Alert(AlertType.CONFIRMATION);
         infoAlert.setTitle("Get information");
@@ -37,9 +42,17 @@ class SearchResult extends StackPane {
 
                     Label nameLabel = new Label(nameToLabel);
                     Label phoneLabel = new Label(phoneToLabel);
+
+                    FileInputStream imageInput = new FileInputStream("./eksamen/image/pofile.jpg"); 
+                    Image image = new Image(imageInput); 
+                    ImageView imageView2 = new ImageView(image);
+                    imageView2.setFitHeight(150);
+                    imageView2.setFitWidth(150);
+    
+                    FlowPane flowInfo = new FlowPane(Orientation.VERTICAL, 15.0,5.0,headerLabel, nameLabel, phoneLabel, imageView2);
+                    flowInfo.setPrefSize(200,200);
                     
-                    FlowPane flowInfo = new FlowPane(Orientation.VERTICAL, 15.0,5.0,headerLabel, nameLabel, phoneLabel);
-                    flowInfo.setPrefSize(250,250);
+                    
                     xButton.setMinWidth(250);
                     bp.setTop(xButton);
                     bp.setCenter(flowInfo);

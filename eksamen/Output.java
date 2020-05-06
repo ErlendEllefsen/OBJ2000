@@ -15,14 +15,12 @@ import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
     
-    Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList, int phone, List<Integer> ratingList){
+    Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList, int phone, List<Integer> ratingList, int amountofMatches){
         TableView<Person> table = new TableView<Person>();
         
         ObservableList<Person> data = FXCollections.observableArrayList();
         for (int element = 0; element<ageList.size();element++) {
             data.addAll(FXCollections.observableArrayList(new Person(idList.get(element), ageList.get(element),sexList.get(element), interestList1.get(element), interestList2.get(element), interestList3.get(element), ratingList.get(element))));
-            if(element==10)
-                break;
         }
        
         TableColumn<Person, Integer> ageCol = new TableColumn<>("Age");
@@ -60,9 +58,8 @@ class Output extends StackPane {
         table.getColumns().addAll(ageCol, sexCol, interest1Col, interest2Col, interest3Col, ratingCol);
         ratingCol.setComparator(ratingCol.getComparator().reversed());
         table.getSortOrder().add(ratingCol);
-        table.setFixedCellSize(50);
-        table.prefHeightProperty().bind(table.fixedCellSizeProperty().multiply(Bindings.size(table.getItems()).add(1.01)));
-        table.maxHeightProperty().bind(table.prefHeightProperty());
+        table.setFixedCellSize(setRowSize(amountofMatches));
+        table.prefHeightProperty().bind(Bindings.size(table.getItems()).multiply(table.getFixedCellSize()).add(300));
         
         getChildren().addAll(table);
         
@@ -84,6 +81,16 @@ class Output extends StackPane {
         });
 
     }
+    
+    private double setRowSize(int amountofMatches) {
+        int rows = 52;
+        if(amountofMatches==10)
+            rows = 52;
+        else
+            rows = 25;
+        return rows;
+    }
+
     public static class Person {
         private final SimpleIntegerProperty id;
         private final SimpleIntegerProperty age;
