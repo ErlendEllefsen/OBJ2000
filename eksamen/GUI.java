@@ -70,8 +70,8 @@ public class GUI extends Application {
         ((BorderPane) pane).setRight((new LogsPane(logsName, logsPhone)));
         return null;
     }
-    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList){
-        ((BorderPane) pane).setCenter((new Output(ageList, sexList, interest1List, interes2List, interest3List, idList, phone, ratingList)));
+    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList, int amountofMatches){
+        ((BorderPane) pane).setCenter((new Output(ageList, sexList, interest1List, interes2List, interest3List, idList, phone, ratingList, amountofMatches)));
         return null;
     }
 

@@ -191,7 +191,7 @@ public class Query {
             }
         }
     }
-    public void fillTable(int minAge, int maxAge, String sex, int phone) throws SQLException {
+    public void fillTable(int minAge, int maxAge, String sex, int phone, int amountofMatches) throws SQLException {
 
         List<Integer> ageList = new ArrayList<Integer>();
         List<String> sexList = new ArrayList<String>();
@@ -199,24 +199,28 @@ public class Query {
         List<String> interest2List = new ArrayList<String>();
         List<String> interest3List = new ArrayList<String>();
         List<Integer> idList = new ArrayList<Integer>();
-        
-        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3, ID FROM Users WHERE Age BETWEEN " + minAge + " AND " + maxAge + " AND Sex="+"'"+ sex +"'";
+        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3, Phone, ID FROM Users WHERE Age BETWEEN " + minAge + " AND " + maxAge + " AND Sex="+"'"+ sex +"'";
         Connection conn = this.connect();
         Statement stmt = conn.createStatement();
         try {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
+                // Slik at du ikke kan finne deg selv
+                if(rs.getInt(6)==phone)
+                    System.out.println("Deg selv");
+                else{
                 ageList.add(rs.getInt(1));
                 sexList.add(rs.getString(2));
                 interest1List.add(rs.getString(3));
                 interest2List.add(rs.getString(4));
                 interest3List.add(rs.getString(5));
-                idList.add(rs.getInt(6));
+                idList.add(rs.getInt(7));
+                }
             }
             stmt.close();
             rs.close();
             List<Integer> ratingList = getInterests(phone, interest1List, interest2List, interest3List);
-            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone, ratingList);
+            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone, ratingList, amountofMatches);
         }finally {
             if (conn != null) {
               try {
@@ -358,7 +362,7 @@ public class Query {
                System.out.println(line);
                 logsId.add(rs.getInt("INFOgiveID"));
     } 
-          System.out.println(logsId);
+          
           rs.close();
           stmt.close(); 
         }
