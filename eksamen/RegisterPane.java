@@ -1,11 +1,16 @@
 package eksamen;
 
+import java.io.File;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 
 class RegisterPane extends StackPane {
     RegisterPane(){
@@ -58,6 +63,7 @@ class RegisterPane extends StackPane {
         setMargin(intrest3Combo, new Insets(0, 0, 50, 245));
         Label sexLabel = new Label("Sex");
         setMargin(sexLabel, new Insets(0, 0, 300, 245));
+
 
         Button regBtn = new Button("Register");
         setMargin(regBtn, new Insets(200, 0, 0, 0));
