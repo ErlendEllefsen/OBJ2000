@@ -6,6 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 class RegisterPane extends StackPane {
     RegisterPane(){
@@ -13,6 +14,7 @@ class RegisterPane extends StackPane {
         String[] sex = {"Woman", "Man"};
 
         Label nameLabel = new Label("Name");
+        nameLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(nameLabel, new Insets(0, 245, 300, 0));
         TextField nameInput = new TextField();
         setMargin(nameInput, new Insets(0, 245, 250, 0));
@@ -21,18 +23,22 @@ class RegisterPane extends StackPane {
         sexCombo.setEditable(false);  
         setMargin(sexCombo, new Insets(0, 0, 250, 245));
         Label ageLabel = new Label("Age");
+        ageLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(ageLabel, new Insets(0, 245, 200, 0));
         TextField ageInput = new TextField();
         setMargin(ageInput, new Insets(0, 245, 150, 0));
         Label cityLabel = new Label("City");
+        cityLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(cityLabel, new Insets(0, 0, 200, 0));
         TextField cityInput = new TextField();
         setMargin(cityInput, new Insets(0, 0, 150, 0));
         Label phoneLabel = new Label("Phone Number");
+        phoneLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(phoneLabel, new Insets(0, 0, 200, 245));
         TextField phoneInput = new TextField();
         setMargin(phoneInput, new Insets(0, 0, 150, 245));
         Label intrest1Label = new Label("Intrest 1");
+        intrest1Label.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(intrest1Label, new Insets(0, 245, 100, 0));
         ComboBox<String> intrest1Combo = new ComboBox<String>();
         intrest1Combo.getItems().addAll("Tur", "Seiling", "Fiske", "Hest", "Sykle", "Trening", 
@@ -41,6 +47,7 @@ class RegisterPane extends StackPane {
                                         "Dans/sang", "Seiling", "Hiking", "Drivhus", "Motorsport", "Sport" );
         setMargin(intrest1Combo, new Insets(0, 245, 50, 0));
         Label intrest2Label = new Label("Intrest 2");
+        intrest2Label.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(intrest2Label, new Insets(0, 0, 100, 0));
         ComboBox<String> intrest2Combo = new ComboBox<String>();
         intrest2Combo.getItems().addAll("Tur", "Seiling", "Fiske", "Hest", "Sykle", "Trening", 
@@ -49,6 +56,7 @@ class RegisterPane extends StackPane {
                                         "Dans/sang", "Seiling", "Hiking", "Drivhus", "Motorsport", "Sport");
         setMargin(intrest2Combo, new Insets(0, 0, 50, 0));
         Label intrest3Label = new Label("Intrest 3");
+        intrest3Label.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(intrest3Label, new Insets(0, 0, 100, 245));
         ComboBox<String> intrest3Combo = new ComboBox<String>();
         intrest3Combo.getItems().addAll("Tur", "Seiling", "Fiske", "Hest", "Sykle", "Trening", 
@@ -57,6 +65,7 @@ class RegisterPane extends StackPane {
                                         "Dans/sang", "Seiling", "Hiking", "Drivhus", "Motorsport", "Sport");
         setMargin(intrest3Combo, new Insets(0, 0, 50, 245));
         Label sexLabel = new Label("Sex");
+        sexLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(sexLabel, new Insets(0, 0, 300, 245));
 
         Button regBtn = new Button("Register");

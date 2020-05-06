@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 /*
 ** Dette er panelet hvor logs blir vist i GUI
 ** Først pakkes logsName og logsPhone verdiene ut via en for løkke for så å bli gjort om til string verier og plasert i to variabler
@@ -32,12 +33,17 @@ class LogsPane extends StackPane{
         bp.setTop(xButton);
         bp.setCenter(scrollPane);
         getChildren().addAll(bp);  
-        setStyle(
-        "-fx-background-color: pink;" + 
-        "-fx-font-family: Courier New;"+
-        "-fx-font-weight: bold;"+
-        "-fx-font-size: 20;"
+        scrollPane.setStyle(
+            "-fx-background: #de5c6e;" +
+            "-fx-background-color: #de5c6e;" 
+            );
+        logsLabel.setStyle(
+        "-fx-font-family: Courier New;" + 
+        "-fx-font-weight: bold;"
+        + "-fx-font-size: 15;"
         );
+        logsLabel.setTextFill(Color.web("#3b323f", 0.8));
+
         xButton.setOnAction(e ->{
             getChildren().remove(bp);
         });
