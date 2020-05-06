@@ -70,6 +70,7 @@ public class GUI extends Application {
 
     public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give, Connection conn)
             throws FileNotFoundException {
+                System.out.print("yo");
         ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give, conn));
         return null; 
     }
@@ -77,8 +78,8 @@ public class GUI extends Application {
         ((BorderPane) pane).setRight((new LogsPane(logsName, logsPhone)));
         return null;
     }
-    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> cityList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList, int amountofMatches){
-        ((BorderPane) pane).setCenter((new Output(ageList, sexList, cityList, interest1List, interes2List, interest3List, idList, phone, ratingList, amountofMatches)));
+    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList, int amountofMatches, List<String> cityList){
+        ((BorderPane) pane).setCenter((new Output(ageList, sexList, interest1List, interes2List, interest3List, idList, phone, ratingList, amountofMatches, cityList)));
         return null;
     }
 
