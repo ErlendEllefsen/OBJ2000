@@ -7,13 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 class LoginPane extends StackPane {
-<<<<<<< HEAD
-    LoginPane() {
-        Label label = new Label("Whats your name?");
-=======
     LoginPane(){
         Label label = new Label("Enter your Phone number");
->>>>>>> 28744e81a55302f569d7fe2674d78f24e577d5f2
         setMargin(label, new Insets(0, 0, 200, 0));
         Button btnLogin = new Button("Login");
         setMargin(btnLogin, new Insets(200, 0, 0, 0));
