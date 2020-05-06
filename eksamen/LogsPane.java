@@ -1,12 +1,18 @@
 package eksamen;
 
+import java.util.List;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 class LogsPane extends StackPane{
-    LogsPane(String logsName){
+    LogsPane(List<String> logsName){
+
+        String input= "";
+        for(int i = 0; i<logsName.size();i++){
+            input = input.concat(logsName.get(i));
+        }
         //String logsIdString = Integer.toString(logsID);
-        Label label = new Label(logsName);
+        Label label = new Label(input);
         getChildren().addAll(label);
         setStyle(
         "-fx-background-color: blue;" + 

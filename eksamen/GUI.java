@@ -3,6 +3,7 @@ package eksamen;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -86,10 +87,11 @@ public class GUI extends Application {
         ((BorderPane) pane).setRight(new SearchResult(name, phone));
         return null; 
     }
-    public static BorderPane logsAction(String logsName){
+    public static BorderPane logsAction(List<String> logsName){
         ((BorderPane) pane).setRight((new LogsPane(logsName)));
         return null;
     }
+
 
     
 }

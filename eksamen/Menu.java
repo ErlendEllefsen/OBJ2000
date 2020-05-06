@@ -1,5 +1,6 @@
 package eksamen;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 import javafx.geometry.Insets;
@@ -11,7 +12,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 class Menu extends StackPane {
-    Menu(int phone){
+    private static final int Integer = 0;
+
+	Menu(int phone) {
 
         String[] sex = { "Woman", "Man" };
 
@@ -60,9 +63,14 @@ class Menu extends StackPane {
                 e1.printStackTrace();
             }
         });
-        btnLogs.setOnAction(e->{
+        btnLogs.setOnAction(e -> {
             Query gg = new Query();
-            gg.getID(phone);
+                
+                
+                gg.getID(phone);
+            
+             
+        
         });
 
     }
