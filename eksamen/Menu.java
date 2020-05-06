@@ -32,7 +32,7 @@ class Menu extends StackPane {
         minSlider.setBlockIncrement(1);
         setMargin(minSlider, new Insets(0, 0, 250, 0));
         Slider maxSlider = new Slider(18, 40, 1);
-        maxSlider.setShowTickMarks(true);
+        maxSlider.setShowTickMarks(false);
         maxSlider.setShowTickLabels(true);
         maxSlider.setMajorTickUnit(1);
         maxSlider.setBlockIncrement(1);
@@ -41,13 +41,18 @@ class Menu extends StackPane {
         sexCombo.getItems().addAll(sex);
         sexCombo.setEditable(false);
         Button btnSearch = new Button("Search");
-        setMargin(btnSearch, new Insets(100, 0, 0, 0));
+        setMargin(btnSearch, new Insets(200, 0, 0, 0));
         Label sexLabel = new Label("Sex");
         label.setTextFill(Color.web("#000000", 0.8));
         setMargin(sexLabel, new Insets(0, 0, 75, 0));
         Button btnLogs = new Button("Logs");
         setMargin(btnLogs, new Insets(300, 0, 0, 0));
-        getChildren().addAll(label, sliderLabel, minSlider, maxSlider, sexCombo, btnSearch, sexLabel, btnLogs);
+        Label rowsLabel = new Label("Rows");
+        setMargin(rowsLabel, new Insets(50, 0, 0, 0));
+        ComboBox<Integer> matchesAmount = new ComboBox<Integer>();
+        matchesAmount.getItems().addAll(10,20);
+        setMargin(matchesAmount, new Insets(100, 0, 0, 0));
+        getChildren().addAll(label, sliderLabel, minSlider, maxSlider, sexCombo, btnSearch, sexLabel, btnLogs, matchesAmount, rowsLabel);
         setStyle("-fx-background-color: pink;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
                 + "-fx-font-size: 15;");
         setPadding(new Insets(0, 10, 0, 10));
@@ -57,20 +62,20 @@ class Menu extends StackPane {
             int maxAge = (int) maxSlider.getValue();
             System.out.println(minAge+ "   "+maxAge);
             String sexV = sexCombo.getValue();
+            int amountofRows = matchesAmount.getValue();
             Query query = new Query();
             
                 try {
-					query.fillTable(minAge, maxAge, sexV, phone);
+					query.fillTable(minAge, maxAge, sexV, phone, amountofRows);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
            
         });
+        // action for å aktivere getID i Query.java ved trykk på btnLogs
         btnLogs.setOnAction(e -> {
             Query gg = new Query();
-                
-                
+
                 gg.getID(phone);
             
              

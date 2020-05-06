@@ -7,11 +7,13 @@ import java.util.Optional;
 
 import javafx.geometry.Orientation;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 
@@ -29,6 +31,8 @@ class SearchResult extends StackPane {
                 Query sendID = new Query();
                 sendID.sendId(yourID, ID_give, conn); 
                 {
+                    BorderPane bp = new BorderPane();
+                    Button xButton = new Button("Fjern vindu");
                     Label headerLabel = new Label("User Info");
                     String infoName = new String (name);
                     String nameToLabel = "Name: " + infoName;
@@ -47,14 +51,27 @@ class SearchResult extends StackPane {
     
                     FlowPane flowInfo = new FlowPane(Orientation.VERTICAL, 15.0,5.0,headerLabel, nameLabel, phoneLabel, imageView2);
                     flowInfo.setPrefSize(200,200);
+                    
+                    
+                    xButton.setMinWidth(250);
+                    bp.setTop(xButton);
+                    bp.setCenter(flowInfo);
 
-                    getChildren().add(flowInfo);   
+
+                    getChildren().add(bp);  
+                    
+                    xButton.setOnAction(e ->{
+                        getChildren().remove(bp);
+
+                    });
                 
                 setStyle(
-                "-fx-background-color: white;" + 
+                "-fx-background-color: pink;" + 
                 "-fx-font-family: Courier New;"+
                 "-fx-font-weight: bold;"+
                 "-fx-font-size: 20;"
+
+            
                 );
                 }
             }
