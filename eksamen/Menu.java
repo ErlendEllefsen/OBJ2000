@@ -1,8 +1,5 @@
 package eksamen;
 
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -19,11 +16,12 @@ class Menu extends StackPane {
         String[] sex = { "Woman", "Man" };
 
         Label label = new Label("Find your Match");
-        label.setTextFill(Color.web("#000000", 0.8));
+        label.setTextFill(Color.web("#3b323f", 0.8));
         setStyle("-fx-font-size: 20;");
         setMargin(label, new Insets(0, 0, 400, 0));
         Label sliderLabel = new Label("Age gap");
-        label.setTextFill(Color.web("#000000", 0.8));
+        label.setTextFill(Color.web("#3b323f", 0.8));
+        sliderLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(sliderLabel, new Insets(0, 0, 325, 0));
         Slider minSlider = new Slider(18, 40, 1);
         minSlider.setShowTickMarks(false);
@@ -43,17 +41,18 @@ class Menu extends StackPane {
         Button btnSearch = new Button("Search");
         setMargin(btnSearch, new Insets(200, 0, 0, 0));
         Label sexLabel = new Label("Sex");
-        label.setTextFill(Color.web("#000000", 0.8));
+        sexLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(sexLabel, new Insets(0, 0, 75, 0));
         Button btnLogs = new Button("Logs");
         setMargin(btnLogs, new Insets(300, 0, 0, 0));
         Label rowsLabel = new Label("Rows");
+        rowsLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(rowsLabel, new Insets(50, 0, 0, 0));
         ComboBox<Integer> matchesAmount = new ComboBox<Integer>();
         matchesAmount.getItems().addAll(10,20);
         setMargin(matchesAmount, new Insets(100, 0, 0, 0));
         getChildren().addAll(label, sliderLabel, minSlider, maxSlider, sexCombo, btnSearch, sexLabel, btnLogs, matchesAmount, rowsLabel);
-        setStyle("-fx-background-color: #e1383c;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
+        setStyle("-fx-background-color: #de5c6e;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
                 + "-fx-font-size: 15;");
         setPadding(new Insets(0, 10, 0, 10));
 

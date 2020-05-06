@@ -5,10 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 class LoginPane extends StackPane {
     LoginPane(){
         Label label = new Label("Enter your Phone number");
+        label.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(label, new Insets(0, 0, 200, 0));
         Button btnLogin = new Button("Login");
         setMargin(btnLogin, new Insets(200, 0, 0, 0));

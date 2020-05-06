@@ -72,6 +72,7 @@ class Output extends StackPane {
 
             // Define our new TableRow
             TableRow<Person> row = new TableRow<>();
+            row.setStyle("-fx-background-color: #f2b09f");
             row.setOnMouseClicked(event -> {
                 int ID_give = table.getSelectionModel().getSelectedItem().getId();
                 Query query = new Query();
