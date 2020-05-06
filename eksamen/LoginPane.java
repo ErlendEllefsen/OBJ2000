@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 class LoginPane extends StackPane {
+    //En login side som sjekker om brukeren har en registrert bruker ved å se om tlf finnes i databasen. 
     LoginPane(){
         Label label = new Label("Enter your Phone number");
         label.setTextFill(Color.web("#3b323f", 0.8));

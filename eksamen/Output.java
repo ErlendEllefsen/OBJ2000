@@ -14,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
-    
+    //Printer tabellen til gui, med data fra databasen. 
     Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList, int phone, List<Integer> ratingList, int amountofMatches, List<String> cityList){
         TableView<Person> table = new TableView<Person>();
         
@@ -76,16 +76,13 @@ class Output extends StackPane {
         setStyle(
         "-fx-background-color: #f2b09f;");
 
-        table.setRowFactory(tv -> {
 
-            // Define our new TableRow
+        table.setRowFactory(tv -> {
             TableRow<Person> row = new TableRow<>();
             row.setStyle("-fx-background-color: #f2b09f");
+            //Kjører ID searchResult query og henter ID.
             row.setOnMouseClicked(event -> {
-                System.out.println("CLICKED DAM");
                 int ID_give = table.getSelectionModel().getSelectedItem().getId();
-                System.out.print(ID_give);
-                System.out.println(phone);
                 Query query = new Query();
                 query.searchResult(ID_give, phone);
             });
@@ -93,7 +90,7 @@ class Output extends StackPane {
         });
 
     }
-    
+    //Setter høyde på radene. 
     private double setRowSize(int amountofMatches) {
         int rows = 52;
         if(amountofMatches==10)
