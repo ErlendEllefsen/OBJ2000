@@ -25,8 +25,10 @@ public class GUI extends Application {
         pane.setTop(new HeaderPane(title, 50, 50));
         pane.setCenter(new OptionsHeaderPane("Register", "Login"));
         pane.setBottom(new FooterHeaderPane(info));
+       
 
         Scene scene = new Scene(pane, 700, 700);
+        primaryStage.setResizable(false);
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
         primaryStage.show();
