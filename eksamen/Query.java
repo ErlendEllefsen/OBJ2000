@@ -359,6 +359,9 @@ public class Query {
             while (rs.next()){
                 logsId.add(rs.getInt("INFOreciveID"));
     } 
+        if(logsId.size() == 0){
+            ErrorMessage error = new ErrorMessage("Ingen liker deg");
+        }
           rs.close();
           stmt.close(); 
         }
