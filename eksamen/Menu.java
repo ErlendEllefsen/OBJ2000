@@ -72,10 +72,10 @@ class Menu extends StackPane {
 				}
            
         });
+        // action for å aktivere getID i Query.java ved trykk på btnLogs
         btnLogs.setOnAction(e -> {
             Query gg = new Query();
-                
-                
+
                 gg.getID(phone);
             
              
