@@ -7,14 +7,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.scene.AccessibleAttribute;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
@@ -76,7 +72,6 @@ class Output extends StackPane {
         table.prefHeightProperty().bind(Bindings.size(table.getItems()).multiply(table.getFixedCellSize()).add(300));
         
         getChildren().addAll(table);
-        table.addEventFilter(ScrollEvent.ANY, Event::consume); 
         setStyle(
         "-fx-background-color: #f2b09f;");
         table.setRowFactory(tv -> {
