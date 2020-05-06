@@ -8,10 +8,10 @@ import javafx.scene.paint.Color;
 class FooterHeaderPane extends StackPane {
     public FooterHeaderPane(String info){
         Label label = new Label(info);
-        label.setTextFill(Color.web("#ff0000", 0.8));
+        label.setTextFill(Color.web("#3b323f", 0.8));
         getChildren().add(label);
         setStyle(
-        "-fx-background-color: blue;" + 
+        "-fx-background-color: #de5c6e;" + 
         "-fx-font-family: Courier New;"+
         "-fx-font-weight: bold;"+
         "-fx-font-size: 20;"

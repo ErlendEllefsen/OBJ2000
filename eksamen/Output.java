@@ -66,7 +66,7 @@ class Output extends StackPane {
        
         
         setStyle(
-        "-fx-background-color: white;");
+        "-fx-background-color: #f2b09f;");
 
         table.setRowFactory(tv -> {
 

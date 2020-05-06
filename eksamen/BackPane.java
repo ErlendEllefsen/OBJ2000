@@ -12,7 +12,7 @@ class BackPane extends StackPane {
         backBtn.setMinHeight(50);
         getChildren().add(backBtn);
         setStyle(
-        "-fx-background-color: blue;" + 
+        "-fx-background-color: #de5c6e;" + 
         "-fx-font-family: Courier New;"+
         "-fx-font-weight: bold;"+
         "-fx-font-size: 20;"

@@ -11,7 +11,7 @@ class FooterMenuPane extends StackPane {
         getChildren().add(btnLogOut);
         setPadding(new Insets(20));
         setStyle(
-        "-fx-background-color: blue;");
+        "-fx-background-color: #de5c6e;");
 
         btnLogOut.setOnAction(e -> GUI.backAction());
     }
