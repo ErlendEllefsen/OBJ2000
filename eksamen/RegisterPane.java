@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 class RegisterPane extends StackPane {
+    //Registrerings side for applikasjonen
     RegisterPane(){
 
         String[] sex = {"Woman", "Man"};
@@ -113,10 +114,12 @@ class RegisterPane extends StackPane {
             String intrest1 = intrest1Combo.getValue();
             String intrest2 = intrest2Combo.getValue();
             String intrest3 = intrest3Combo.getValue();
+            //Sjekker for like interesser
             boolean case1 = intrest1.contentEquals(intrest2);
             boolean case2 = intrest1.contentEquals(intrest3);
             boolean case3 = intrest2.contentEquals(intrest3);
             if(case1 == true || case2 == true || case3 == true){
+                //gir denne error meldingen om noen interesser matcher.
                 ErrorMessage error = new ErrorMessage("Duplicate interests not allowed!");
             }else{
             Query query = new Query();

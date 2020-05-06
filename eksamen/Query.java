@@ -108,12 +108,12 @@ public class Query {
         }
 
     }
+    //Henter ID fra tabellen ved å trykke på tabellen. 
     public void searchResult (int ID_give, int phone) {
         String sql = "SELECT * FROM Users WHERE ID=" + ID_give;
         Connection conn = this.connect(); 
         try {
             Statement stmt  = conn.createStatement();
-            System.out.println("testing");
             ResultSet rs    = stmt.executeQuery(sql); 
             int yourID = getLogged(phone);
             while(rs.next()) {
@@ -139,6 +139,7 @@ public class Query {
                 }
             }
     }
+    //Finner ID en til brukeren ved å bruken det unike telefon nr. til brukeren. 
     public int getLogged(int phone){
         int yourID = 0;
         Connection conn = this.connect();
@@ -168,7 +169,9 @@ public class Query {
         return yourID;
         
     }
-
+    
+    //Sender brukeren sin ID og ID til personen brukeren trykker på i tabellen til en tabell i databasen
+    //for å holde styr på hvem som har fått informasjon om hvem. 
     public void sendId(int yourID, int ID_give, Connection conn) {
         String sql = "INSERT INTO infoexchange(inforeciveid, infogiveid) VALUES(?,?)";
         try (

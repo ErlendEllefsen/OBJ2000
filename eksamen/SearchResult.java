@@ -21,7 +21,7 @@ import javafx.scene.paint.Color;
 class SearchResult extends StackPane {
     SearchResult(String name, String phone, Integer yourID, Integer ID_give, Connection conn)
             throws FileNotFoundException {
-
+//Vindu som kommer opp som en "sikkerhet" for brukeren om brukeren trykker feil.
         Alert infoAlert = new Alert(AlertType.CONFIRMATION);
         infoAlert.setTitle("Get information");
         infoAlert.setHeaderText("Get information about user");
@@ -29,9 +29,11 @@ class SearchResult extends StackPane {
 
         Optional<ButtonType> result = infoAlert.showAndWait();
             if (result.get() == ButtonType.OK){
+                //Query som sender brukeren sin ID til database for å ha kontroll på hvem som har fått informasjon om hvem. 
                 Query sendID = new Query();
                 sendID.sendId(yourID, ID_give, conn); 
                 {
+                    //Vindu som viser informasjonen til den brukeren som ble trykket på i tabellen. 
                     BorderPane bp = new BorderPane();
                     Button xButton = new Button("Remove window");
                     xButton.setTextFill(Color.web("#3b323f", 0.8));
@@ -82,7 +84,7 @@ class SearchResult extends StackPane {
             }
 
          else {
-            //Nothing happens, go back.
+            //Gå tilbake til tabellen.
          }
     }
 }
