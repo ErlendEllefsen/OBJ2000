@@ -3,10 +3,12 @@ package eksamen;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 class BackPane extends StackPane {
     BackPane(String back){
         Button backBtn = new Button(back);
+        backBtn.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(backBtn, new Insets(0, 0, 0, 550));
         backBtn.setMinWidth(100);
         backBtn.setMinHeight(50);

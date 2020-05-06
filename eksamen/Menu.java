@@ -40,10 +40,12 @@ class Menu extends StackPane {
         sexCombo.setEditable(false);
         Button btnSearch = new Button("Search");
         setMargin(btnSearch, new Insets(200, 0, 0, 0));
+        btnSearch.setTextFill(Color.web("#3b323f", 0.8));
         Label sexLabel = new Label("Sex");
         sexLabel.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(sexLabel, new Insets(0, 0, 75, 0));
         Button btnLogs = new Button("Logs");
+        btnLogs.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(btnLogs, new Insets(300, 0, 0, 0));
         Label rowsLabel = new Label("Rows");
         rowsLabel.setTextFill(Color.web("#3b323f", 0.8));

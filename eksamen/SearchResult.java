@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 class SearchResult extends StackPane {
     SearchResult(String name, String phone, Integer yourID, Integer ID_give, Connection conn)
@@ -33,7 +34,9 @@ class SearchResult extends StackPane {
                 {
                     BorderPane bp = new BorderPane();
                     Button xButton = new Button("Fjern vindu");
+                    xButton.setTextFill(Color.web("#3b323f", 0.8));
                     Label headerLabel = new Label("User Info");
+                    headerLabel.setTextFill(Color.web("#3b323f", 0.8));
                     String infoName = new String (name);
                     String nameToLabel = "Name: " + infoName;
 
@@ -41,7 +44,9 @@ class SearchResult extends StackPane {
                     String phoneToLabel = "Phone: " + infoPhone;
 
                     Label nameLabel = new Label(nameToLabel);
+                    nameLabel.setTextFill(Color.web("#3b323f", 0.8));
                     Label phoneLabel = new Label(phoneToLabel);
+                    phoneLabel.setTextFill(Color.web("#3b323f", 0.8));
 
                     FileInputStream imageInput = new FileInputStream("./eksamen/image/pofile.jpg"); 
                     Image image = new Image(imageInput); 
@@ -50,10 +55,10 @@ class SearchResult extends StackPane {
                     imageView2.setFitWidth(150);
     
                     FlowPane flowInfo = new FlowPane(Orientation.VERTICAL, 15.0,5.0,headerLabel, nameLabel, phoneLabel, imageView2);
-                    flowInfo.setPrefSize(200,200);
+                    flowInfo.setMaxSize(200, 200);
                     
                     
-                    xButton.setMinWidth(200);
+                    xButton.setMinWidth(400);
                     bp.setTop(xButton);
                     bp.setCenter(flowInfo);
 

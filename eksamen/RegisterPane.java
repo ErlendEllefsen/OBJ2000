@@ -71,6 +71,7 @@ class RegisterPane extends StackPane {
 
 
         Button regBtn = new Button("Register");
+        regBtn.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(regBtn, new Insets(200, 0, 0, 0));
         regBtn.setMinWidth(100);
         regBtn.setMinHeight(50);
