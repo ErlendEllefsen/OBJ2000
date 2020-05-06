@@ -86,8 +86,8 @@ public class GUI extends Application {
         ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give, conn));
         return null; 
     }
-    public static BorderPane logsAction(List<String> logsName){
-        ((BorderPane) pane).setRight((new LogsPane(logsName)));
+    public static BorderPane logsAction(List<String> logsName, List<Integer> logsPhone){
+        ((BorderPane) pane).setRight((new LogsPane(logsName, logsPhone)));
         return null;
     }
     public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList){
