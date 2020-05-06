@@ -65,6 +65,8 @@ class Output extends StackPane {
 
         table.setItems(data);
         
+        // Kompilatoren klager på neste linje ettersom vi ikke adder alle kolonnene so vi har deklarert, men
+        // vi skal ikke vise id kollonnen og andre. (Type Safety)
         table.getColumns().addAll(ageCol, sexCol, cityCol, interest1Col, interest2Col, interest3Col, ratingCol);
         ratingCol.setComparator(ratingCol.getComparator().reversed());
         table.getSortOrder().add(ratingCol);

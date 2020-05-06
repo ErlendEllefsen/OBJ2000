@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class GUI extends Application {
 
     public static void main(String[] args) {
+        // start
         launch(args);
         // Sletter alle tekstfiler
         deleteFile file = new deleteFile();

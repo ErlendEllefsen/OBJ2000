@@ -121,6 +121,7 @@ class RegisterPane extends StackPane {
             if(case1 == true || case2 == true || case3 == true){
                 //gir denne error meldingen om noen interesser matcher.
                 ErrorMessage error = new ErrorMessage("Duplicate interests not allowed!");
+                System.out.println(error);
             }else{
             Query query = new Query();
             query.insert(name, age, phone, sexV, intrest1, intrest2, intrest3, city);

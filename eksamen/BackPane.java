@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+// * Footer med tilbakeknapp
+
 class BackPane extends StackPane {
     BackPane(String back){
         Button backBtn = new Button(back);
