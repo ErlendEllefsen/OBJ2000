@@ -28,6 +28,7 @@ class LogsPane extends StackPane{
                     scrollPane.setPrefSize(250,250);
                     //scrollPane.setStyle("-fx-background-color: pink;");
         Button xButton = new Button("Fjern vindu");
+        xButton.setTextFill(Color.web("#3b323f", 0.8));
         xButton.setMinWidth(250);
         bp.setTop(xButton);
         bp.setCenter(scrollPane);
@@ -40,6 +41,11 @@ class LogsPane extends StackPane{
         "-fx-font-family: Courier New;" + 
         "-fx-font-weight: bold;"
         + "-fx-font-size: 15;"
+        );
+        xButton.setStyle(
+        "-fx-font-family: Courier New;" + 
+        "-fx-font-weight: bold;" + 
+        "-fx-font-size: 15;"
         );
         logsLabel.setTextFill(Color.web("#3b323f", 0.8));
 

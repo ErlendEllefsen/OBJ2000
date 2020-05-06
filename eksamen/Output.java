@@ -20,7 +20,14 @@ class Output extends StackPane {
         
         ObservableList<Person> data = FXCollections.observableArrayList();
         for (int element = 0; element<ageList.size();element++) {
+<<<<<<< HEAD
             data.addAll(FXCollections.observableArrayList(new Person(idList.get(element), ageList.get(element),sexList.get(element), cityList.get(element), interestList1.get(element), interestList2.get(element), interestList3.get(element), ratingList.get(element))));
+=======
+            if(ratingList.get(element)==0)
+                System.out.print("ingen match");
+            else
+            data.addAll(FXCollections.observableArrayList(new Person(idList.get(element), ageList.get(element),sexList.get(element), interestList1.get(element), interestList2.get(element), interestList3.get(element), ratingList.get(element))));
+>>>>>>> 2e435be8b4becec9fb9caa9e1c7441cd871fe9b8
         }
        
         TableColumn<Person, Integer> ageCol = new TableColumn<>("Age");

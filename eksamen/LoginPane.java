@@ -13,6 +13,7 @@ class LoginPane extends StackPane {
         label.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(label, new Insets(0, 0, 200, 0));
         Button btnLogin = new Button("Login");
+        btnLogin.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(btnLogin, new Insets(200, 0, 0, 0));
         TextField name = new TextField();
         name.setPrefWidth(180);

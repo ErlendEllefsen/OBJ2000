@@ -17,8 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Query {
+    // Etablerer connection til sqlite databasen
     private Connection connect() {
-        // SQLite connection string
         String url = "jdbc:sqlite:./db/DateMe.db";
         Connection conn = null;
         
@@ -30,6 +30,7 @@ public class Query {
         return conn;
     }
 
+    // Registrerer data om brukeren i databasen
     public void insert(String name, int age, int phone, String sex, String intrest1, String intrest2, String intrest3,
             String city) {
         String sql = "INSERT INTO users(name, age, phone, sex, interest1, interest2, interest3, city) VALUES(?,?,?,?,?,?,?,?)";
@@ -47,6 +48,7 @@ public class Query {
             pstmt.close();
             login(phone);
         } catch (SQLException e) {
+            // Om inserten blir avslått av databasen
             ErrorMessage error = new ErrorMessage("User is already registered or you have empty fields");
             System.out.println(e.getMessage() + " " + error);
         }finally {
@@ -58,10 +60,11 @@ public class Query {
             }
         }
     }
-
+    // Skriver tekstfil
     public void writeFile(int Id, int phone) {
         try {
             String phoneString = new Integer(phone).toString();
+            // Sletter tekstfilen om en allerede er laget i samme session
             Files.deleteIfExists(Paths.get(phoneString + ".txt"));
         } catch (NoSuchFileException e) {
             System.out.println("No such file/directory exists");
@@ -70,6 +73,7 @@ public class Query {
         }
 
         try {
+            // Skriver ID i teksfilen
             FileWriter writer = new FileWriter(phone + ".txt", true);
             writer.write(new Integer(Id).toString());
             writer.close();
@@ -79,6 +83,7 @@ public class Query {
         }
     }
 
+    // Logger deg inn med telefonnummer
     public void login(int phone) {
         String sql = "SELECT ID FROM Users WHERE phone=" + phone;
         int id;
@@ -90,6 +95,7 @@ public class Query {
             stmt.close();
             rs.close();
         }catch (SQLException e) {
+            //Om telefonnummeret ikke finnes i databasen
             ErrorMessage error = new ErrorMessage("Bruker finnes ikke");
             System.out.println(e.getMessage() + error);
         }finally {
@@ -185,8 +191,10 @@ public class Query {
             }
         }
     }
+    // Fyllet tabellen etter hvilke parametre du har lagt inn i søket
     public void fillTable(int minAge, int maxAge, String sex, int phone, int amountofMatches) throws SQLException {
 
+        // All info som trengs settes inn i tabeller
         List<Integer> ageList = new ArrayList<Integer>();
         List<String> sexList = new ArrayList<String>();
         List<String> cityList = new ArrayList<String>();
@@ -226,7 +234,7 @@ public class Query {
             }
         }
     }
-           
+    // Henter interessens til en påloggede brukeren og sammenligner dem med alle brukere i tabellen
     public List<Integer> getInterests(int phone, List<String> interest1List, List<String> interest2List, List<String> interest3List) throws SQLException {
         List<String> userInterests = new ArrayList<String>();
         List<Integer> ratingList = new ArrayList<Integer>();
@@ -244,6 +252,13 @@ public class Query {
             stmt.close();
             rs.close();
             int ratingPoint=0;
+            /*
+             * For å rangere matcher ut i fra interesser sammenlignes først stringene i tabellene opp mot hverandre
+             * Deretter gis hver bruker i tabellen en rating som vises i tabellen
+             * Mest poeng gis om interesse 1 matcher for begge parter
+             * Minst poeng gis om interesse 2 matcher for begge parter
+             * Om ingen interesser matcher blir det ikke gitt noen poeng
+             */
         for(int i = 0; i<interest1List.size(); i++){
             String firstInterest = new String(interest1List.get(i));
             String secondInterest = new String(interest2List.get(i));
@@ -293,9 +308,9 @@ public class Query {
 
     }
     /*
-    ** useId bruker logsId som blir hentet fra getID metoden. 
-    ** for løkken pakker ut verdiene i logsId arraylisten slik at alle verdiene utfører en spørring. 
-    ** Videre blir  narv og tlfnr på matchene lagt inn to forskjellige arraylist og sendt videre til GUI.java
+     * useId bruker logsId som blir hentet fra getID metoden. 
+     * for løkken pakker ut verdiene i logsId arraylisten slik at alle verdiene utfører en spørring. 
+     * Videre blir  narv og tlfnr på matchene lagt inn to forskjellige arraylist og sendt videre til GUI.java
     */
     public void useID(List<Integer> logsId){
         List<String> logsName = new ArrayList<String>();
@@ -363,6 +378,7 @@ public class Query {
     } 
         if(logsId.size() == 0){
             ErrorMessage error = new ErrorMessage("Ingen liker deg");
+            System.out.print(error);
         }
           rs.close();
           stmt.close(); 

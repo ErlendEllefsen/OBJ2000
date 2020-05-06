@@ -3,6 +3,7 @@ package eksamen;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 class OptionsHeaderPane extends StackPane {
     public static final String OptionsHeaderPane = null;
@@ -10,10 +11,12 @@ class OptionsHeaderPane extends StackPane {
 	boolean clicked = false;
     public OptionsHeaderPane(String registerText, String loginText){
         Button register = new Button(registerText);
+        register.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(register, new Insets(0, 0, 200, 0));
         register.setMinWidth(200);
         register.setMinHeight(100);
         Button login = new Button(loginText);
+        login.setTextFill(Color.web("#3b323f", 0.8));
         setMargin(login, new Insets(200, 0, 0, 0));
         login.setMinWidth(200);
         login.setMinHeight(100);
