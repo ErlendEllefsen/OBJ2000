@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+/*
+**oppretter label og styling for tilte som er oprettet i GUI.java
+*/
+
 class HeaderPane extends StackPane {
     public HeaderPane(String title, int height, int fontsize){
         Label label = new Label(title);

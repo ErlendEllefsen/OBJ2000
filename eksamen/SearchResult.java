@@ -35,7 +35,7 @@ class SearchResult extends StackPane {
                 {
                     //Vindu som viser informasjonen til den brukeren som ble trykket på i tabellen. 
                     BorderPane bp = new BorderPane();
-                    Button xButton = new Button("Fjern vindu");
+                    Button xButton = new Button("Remove window");
                     xButton.setTextFill(Color.web("#3b323f", 0.8));
                     Label headerLabel = new Label("User Info");
                     headerLabel.setTextFill(Color.web("#3b323f", 0.8));

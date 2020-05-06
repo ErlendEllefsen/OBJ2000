@@ -14,12 +14,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
-    //Printer tabellen til gui, med data fra databasen. 
+    
     Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList, int phone, List<Integer> ratingList, int amountofMatches, List<String> cityList){
         TableView<Person> table = new TableView<Person>();
         
         ObservableList<Person> data = FXCollections.observableArrayList();
         for (int element = 0; element<ageList.size();element++) {
+            data.addAll(FXCollections.observableArrayList(new Person(idList.get(element), ageList.get(element),sexList.get(element), cityList.get(element), interestList1.get(element), interestList2.get(element), interestList3.get(element), ratingList.get(element))));
             if(ratingList.get(element)==0)
                 System.out.print("ingen match");
             else
@@ -82,7 +83,10 @@ class Output extends StackPane {
             row.setStyle("-fx-background-color: #f2b09f");
             //Kjører ID searchResult query og henter ID.
             row.setOnMouseClicked(event -> {
+                System.out.println("CLICKED DAM");
                 int ID_give = table.getSelectionModel().getSelectedItem().getId();
+                System.out.print(ID_give);
+                System.out.println(phone);
                 Query query = new Query();
                 query.searchResult(ID_give, phone);
             });
