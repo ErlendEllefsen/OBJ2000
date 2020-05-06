@@ -53,7 +53,7 @@ class SearchResult extends StackPane {
                     flowInfo.setPrefSize(200,200);
                     
                     
-                    xButton.setMinWidth(250);
+                    xButton.setMinWidth(200);
                     bp.setTop(xButton);
                     bp.setCenter(flowInfo);
 

@@ -30,6 +30,7 @@ public class GUI extends Application {
         pane.setStyle("-fx-background-color: #f2b09f;");
 
         Scene scene = new Scene(pane, 700, 700);
+        primaryStage.setResizable(false);
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -39,7 +40,6 @@ public class GUI extends Application {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Register", 50, 50));
         ((BorderPane) pane).setCenter(new RegisterPane());
         ((BorderPane) pane).setBottom(new BackPane("Go Back"));
-
         return null;
     }
 
