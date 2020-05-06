@@ -1,11 +1,8 @@
 package eksamen;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.util.List;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,20 +15,24 @@ import javafx.scene.layout.StackPane;
 
 class Output extends StackPane { 
     
-    Output(){
+    Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList, int phone, List<Integer> ratingList){
         TableView<Person> table = new TableView<Person>();
+        System.out.println(ratingList);
         
         ObservableList<Person> data = FXCollections.observableArrayList();
-        
-        data.addAll(FXCollections.observableArrayList(new Person(0, 0,"Oman", "Fisking", "Soving", "Sport")));
-    
+        for (int element = 0; element<ageList.size();element++) {
+            data.addAll(FXCollections.observableArrayList(new Person(idList.get(element), ageList.get(element),sexList.get(element), interestList1.get(element), interestList2.get(element), interestList3.get(element), ratingList.get(element))));
+            if(element==10)
+                break;
+        }
+       
         TableColumn<Person, Integer> ageCol = new TableColumn<>("Age");
-        ageCol.setMinWidth(100);
+        ageCol.setMinWidth(50);
         ageCol.setCellValueFactory(
                 new PropertyValueFactory<Person, Integer>("age"));
 
         TableColumn<Person, String> sexCol = new TableColumn<>("Sex");
-        sexCol.setMinWidth(100);
+        sexCol.setMinWidth(75);
         sexCol.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("sex"));
 
@@ -50,12 +51,23 @@ class Output extends StackPane {
         interest3Col.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("interest3"));
 
+        TableColumn<Person, Integer> ratingCol = new TableColumn<>("Match Rating");
+        ratingCol.setMinWidth(100);
+        ratingCol.setCellValueFactory(
+                new PropertyValueFactory<Person, Integer>("rating"));
+
         table.setItems(data);
         
-        table.getColumns().addAll(ageCol, sexCol, interest1Col, interest2Col, interest3Col);
-
+        table.getColumns().addAll(ageCol, sexCol, interest1Col, interest2Col, interest3Col, ratingCol);
+        ratingCol.setComparator(ratingCol.getComparator().reversed());
+        table.getSortOrder().add(ratingCol);
+        table.setFixedCellSize(50);
+        table.prefHeightProperty().bind(table.fixedCellSizeProperty().multiply(Bindings.size(table.getItems()).add(1.01)));
+        table.maxHeightProperty().bind(table.prefHeightProperty());
+        
         getChildren().addAll(table);
-        table.getSortOrder().add(ageCol);
+        
+       
         
         setStyle(
         "-fx-background-color: white;");
@@ -67,7 +79,7 @@ class Output extends StackPane {
             row.setOnMouseClicked(event -> {
                 int ID_give = table.getSelectionModel().getSelectedItem().getId();
                 Query query = new Query();
-                query.searchResult(ID_give);
+                query.searchResult(ID_give, phone);
             });
             return row;
         });
@@ -80,14 +92,16 @@ class Output extends StackPane {
         private final SimpleStringProperty interest1;
         private final SimpleStringProperty interest2;
         private final SimpleStringProperty interest3;
+        private final SimpleIntegerProperty rating;
      
-        private Person(Integer id, Integer age, String sex, String interest1, String interest2, String interest3) {
+        private Person(Integer id, Integer age, String sex, String interest1, String interest2, String interest3, Integer rating) {
             this.id = new SimpleIntegerProperty(id);
             this.age = new SimpleIntegerProperty(age);
             this.sex = new SimpleStringProperty(sex);
             this.interest1 = new SimpleStringProperty(interest1);
             this.interest2 = new SimpleStringProperty(interest2);
             this.interest3 = new SimpleStringProperty(interest3);
+            this.rating = new SimpleIntegerProperty(rating);
 
         }
      
@@ -113,6 +127,10 @@ class Output extends StackPane {
 
         public String getInterest3() {
             return interest3.get();
+        }
+
+        public Integer getRating() {
+            return rating.get();
         }
             
     }

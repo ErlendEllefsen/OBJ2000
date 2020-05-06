@@ -78,17 +78,20 @@ public class GUI extends Application {
     public static BorderPane registerDone(int phone){
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Home Page", 25, 30));
         ((BorderPane) pane).setLeft(new Menu(phone));
-        ((BorderPane) pane).setCenter(new Output());
         ((BorderPane) pane).setBottom((new FooterMenuPane()));
         return null;
     }
 
-    public static BorderPane searchAction(String name, String phone) {
-        ((BorderPane) pane).setRight(new SearchResult(name, phone));
+    public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give) {
+        ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give));
         return null; 
     }
     public static BorderPane logsAction(List<String> logsName){
         ((BorderPane) pane).setRight((new LogsPane(logsName)));
+        return null;
+    }
+    public static BorderPane matchSearch(List<Integer> ageList, List<String> sexList, List<String> interest1List, List<String> interes2List, List<String> interest3List, List<Integer> idList, int phone, List<Integer> ratingList){
+        ((BorderPane) pane).setCenter((new Output(ageList, sexList, interest1List, interes2List, interest3List, idList, phone, ratingList)));
         return null;
     }
 

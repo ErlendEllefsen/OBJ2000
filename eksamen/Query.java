@@ -15,7 +15,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -80,40 +79,96 @@ public class Query {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
             id = rs.getInt("id");
-            conn.close();
             writeFile(id, phone);
             stmt.close();
-        } catch (SQLException e) {
+            rs.close();
+            conn.close();
+        }catch (SQLException e) {
+            System.out.println("Error i login");
             System.out.println(e.getMessage());
         }
 
     }
-
-    public void searchResult(int ID_give) {
+    public void searchResult (int ID_give, int phone) {
         try {
             String sql = "SELECT * FROM Users WHERE ID=" + ID_give;
             Connection conn = this.connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql); 
+            int yourID = getLogged(phone);
+            while(rs.next()) {
                 String name = rs.getString("name");
-                String phone = rs.getString("phone");
-                GUI.searchAction(name, phone);
+                String phoneString = rs.getString("phone");
+                GUI.searchAction(name, phoneString, yourID, ID_give);
+                rs.close();
             }
             stmt.close();
-        } catch (Exception e) {
-            System.err.println("EXCEPTION");
+            conn.close();
+            
+            
+        }
+        catch (Exception e)
+            {
+              System.err.println("searchResult Error");
+              System.err.println(e.getMessage());
+            }
+    }
+    public int getLogged(int phone){
+        int yourID = 0;
+        try {
+            String sql = "SELECT ID FROM Users WHERE phone="+phone;
+            Connection conn = this.connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql); 
+            
+            while(rs.next()) {
+                yourID = rs.getInt("id");
+                
+            }
+
+            rs.close();   
+            conn.close();
+        }
+        catch (Exception e)
+        {
+            System.err.println("getLogged Error");
             System.err.println(e.getMessage());
         }
+        return yourID;
+        
     }
 
-    public void fillTable(int minAge, int maxAge, String sex) throws SQLException {
+    public void sendId(int yourID, int ID_give) {
+        String sql = "INSERT INTO infoexchange(inforeciveid, infogiveid) VALUES(?,?)";
+        try (Connection conn = this.connect();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, yourID);
+        stmt.setInt(2, ID_give);
+        stmt.executeUpdate();
+        stmt.close();
+        conn.close();
+        System.out.println(yourID);
+        System.out.println(ID_give);
+
+        }
+        
+        
+        catch (SQLException e)
+        {
+            System.err.println("SendID Error");
+            System.out.println(e.getMessage());
+        }
+    }
+    public void fillTable(int minAge, int maxAge, String sex, int phone) throws SQLException {
+
         List<Integer> ageList = new ArrayList<Integer>();
         List<String> sexList = new ArrayList<String>();
         List<String> interest1List = new ArrayList<String>();
         List<String> interest2List = new ArrayList<String>();
         List<String> interest3List = new ArrayList<String>();
-        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3 FROM Users";
+        List<Integer> idList = new ArrayList<Integer>();
+        
+        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3, ID FROM Users WHERE Age BETWEEN " + minAge + " AND " + maxAge + " AND Sex="+"'"+ sex +"'";
         Connection conn = this.connect();
         Statement stmt = conn.createStatement();
         try {
@@ -121,44 +176,96 @@ public class Query {
             while (rs.next()) {
                 ageList.add(rs.getInt(1));
                 sexList.add(rs.getString(2));
+                interest1List.add(rs.getString(3));
+                interest2List.add(rs.getString(4));
+                interest3List.add(rs.getString(5));
+                idList.add(rs.getInt(6));
             }
-            System.out.println(ageList);
-            System.out.println(sexList);
-        } finally {
+            List<Integer> ratingList = getInterests(phone, interest1List, interest2List, interest3List);
+            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone, ratingList);
+        }finally {
             stmt.close();
+            conn.close();
         }
     }
-    public void useID() throws SQLException {
-        List<String> logsName = new ArrayList<String>();
-        int logsId = 9;
-        String sql2 = "SELECT name FROM users Where ID="+logsId;
+           
+    public List<Integer> getInterests(int phone, List<String> interest1List, List<String> interest2List, List<String> interest3List) throws SQLException {
+        List<String> userInterests = new ArrayList<String>();
+        List<Integer> ratingList = new ArrayList<Integer>();
+        String sql = "SELECT Interest1, Interest2, Interest3 FROM Users Where phone="+phone;
         Connection conn = this.connect();
-        Statement stmt2 = conn.createStatement();
-    try {
-        System.out.println(logsId);
-        ResultSet rs2 = stmt2.executeQuery(sql2);
-        while (rs2.next()){
-            logsName.add(rs2.getString("name"));  
+        Statement stmt  = conn.createStatement();
+        try {
+            ResultSet rs    = stmt.executeQuery(sql);
+            while (rs.next()) {
+                userInterests.add(rs.getString(1));
+                userInterests.add(rs.getString(2));
+                userInterests.add(rs.getString(3));
+                
+            }
+            System.out.println(userInterests);
+            int ratingPoint=0;
+        for(int i = 0; i<interest1List.size(); i++){
+            String firstInterest = new String(interest1List.get(i));
+            String secondInterest = new String(interest2List.get(i));
+            String thirdInterest = new String(interest3List.get(i));
+            boolean first = firstInterest.contentEquals(userInterests.get(0));
+            boolean second = secondInterest.contentEquals(userInterests.get(0));
+            boolean third = thirdInterest.contentEquals(userInterests.get(0));
+            boolean fourth = firstInterest.contentEquals(userInterests.get(1));
+            boolean fifth = secondInterest.contentEquals(userInterests.get(1));
+            boolean sixth = thirdInterest.contentEquals(userInterests.get(1));
+            boolean seventh = firstInterest.contentEquals(userInterests.get(2));
+            boolean eighth = secondInterest.contentEquals(userInterests.get(2));
+            boolean last = thirdInterest.contentEquals(userInterests.get(2));
+          
+            System.out.println(last);
+            System.out.println(thirdInterest + " " + userInterests.get(2));
+
+            if(first == true)
+                ratingPoint=ratingPoint+12;
+            if(second == true)
+                ratingPoint=ratingPoint+9;
+            if(third == true)
+                ratingPoint=ratingPoint+6;
+            if(fourth == true)
+                ratingPoint=ratingPoint+9;
+            if(fifth == true)
+                ratingPoint=ratingPoint+6;
+            if(sixth == true)
+                ratingPoint=ratingPoint+3;
+            if(seventh == true)
+                ratingPoint=ratingPoint+6;
+            if(eighth == true)
+                ratingPoint=ratingPoint+3;
+            if(last == true)
+                ratingPoint=ratingPoint+1;
+
+            ratingList.add(ratingPoint);
+            System.out.println(ratingPoint);
+            ratingPoint=0;
+
         }
-        System.out.println(logsName);
-        GUI.logsAction(logsName);
-    }
-    catch (Exception e){
-        System.out.println("feil2");
-    }
+        }finally {
+            stmt.close();
+            conn.close();
+        }
+
+        return ratingList;
+
     }
 
     public void getID(int phone)  {
             
-            List<Integer> logsId = new ArrayList<Integer>();
-            //List<String> logsName = new ArrayList<String>();
-            String line;
-            String bla = Integer.toString(phone);
-            System.out.println(bla);
-             
-            //String sql2 = "SELECT name FROM users Where ID="+logsId;
-            
-            //Statement stmt2 = conn.createStatement();
+        List<Integer> logsId = new ArrayList<Integer>();
+        //List<String> logsName = new ArrayList<String>();
+        String line;
+        String bla = Integer.toString(phone);
+        System.out.println(bla);
+         
+        //String sql2 = "SELECT name FROM users Where ID="+logsId;
+        
+        //Statement stmt2 = conn.createStatement();
         try {
             BufferedReader in = new BufferedReader(new FileReader(bla+".txt"));
             Connection conn = this.connect();
