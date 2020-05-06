@@ -70,7 +70,6 @@ public class GUI extends Application {
 
     public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give, Connection conn)
             throws FileNotFoundException {
-                System.out.print("yo");
         ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give, conn));
         return null; 
     }
