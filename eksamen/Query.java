@@ -171,6 +171,7 @@ public class Query {
         List<String> interest2List = new ArrayList<String>();
         List<String> interest3List = new ArrayList<String>();
         List<Integer> idList = new ArrayList<Integer>();
+        
         String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3, ID FROM Users WHERE Age BETWEEN " + minAge + " AND " + maxAge + " AND Sex="+"'"+ sex +"'";
         Connection conn = this.connect();
         Statement stmt  = conn.createStatement();
@@ -184,14 +185,16 @@ public class Query {
                 interest3List.add(rs.getString(5));
                 idList.add(rs.getInt(6));
             }
-            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone);
+            List<Integer> ratingList = getInterests(phone, interest1List, interest2List, interest3List);
+            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone, ratingList);
         }finally {
             stmt.close();
             conn.close();
         }
     }
-    public List<String> getInterests(int phone) throws SQLException {
+    public List<Integer> getInterests(int phone, List<String> interest1List, List<String> interest2List, List<String> interest3List) throws SQLException {
         List<String> userInterests = new ArrayList<String>();
+        List<Integer> ratingList = new ArrayList<Integer>();
         String sql = "SELECT Interest1, Interest2, Interest3 FROM Users Where phone="+phone;
         Connection conn = this.connect();
         Statement stmt  = conn.createStatement();
@@ -203,13 +206,55 @@ public class Query {
                 userInterests.add(rs.getString(3));
                 
             }
-            rs.close();
-            return userInterests;
+            System.out.println(userInterests);
+            int ratingPoint=0;
+        for(int i = 0; i<interest1List.size(); i++){
+            String firstInterest = new String(interest1List.get(i));
+            String secondInterest = new String(interest2List.get(i));
+            String thirdInterest = new String(interest3List.get(i));
+            boolean first = firstInterest.contentEquals(userInterests.get(0));
+            boolean second = secondInterest.contentEquals(userInterests.get(0));
+            boolean third = thirdInterest.contentEquals(userInterests.get(0));
+            boolean fourth = firstInterest.contentEquals(userInterests.get(1));
+            boolean fifth = secondInterest.contentEquals(userInterests.get(1));
+            boolean sixth = thirdInterest.contentEquals(userInterests.get(1));
+            boolean seventh = firstInterest.contentEquals(userInterests.get(2));
+            boolean eighth = secondInterest.contentEquals(userInterests.get(2));
+            boolean last = thirdInterest.contentEquals(userInterests.get(2));
+          
+            System.out.println(last);
+            System.out.println(thirdInterest + " " + userInterests.get(2));
+
+            if(first == true)
+                ratingPoint=ratingPoint+12;
+            if(second == true)
+                ratingPoint=ratingPoint+9;
+            if(third == true)
+                ratingPoint=ratingPoint+6;
+            if(fourth == true)
+                ratingPoint=ratingPoint+9;
+            if(fifth == true)
+                ratingPoint=ratingPoint+6;
+            if(sixth == true)
+                ratingPoint=ratingPoint+3;
+            if(seventh == true)
+                ratingPoint=ratingPoint+6;
+            if(eighth == true)
+                ratingPoint=ratingPoint+3;
+            if(last == true)
+                ratingPoint=ratingPoint+1;
+
+            ratingList.add(ratingPoint);
+            System.out.println(ratingPoint);
+            ratingPoint=0;
+
+        }
         }finally {
             stmt.close();
             conn.close();
         }
-        
+
+        return ratingList;
 
     }
 
