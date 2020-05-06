@@ -254,18 +254,54 @@ public class Query {
         return ratingList;
 
     }
+    public void useID(List<Integer> logsId){
+        int input;
+        List<String> logsName = new ArrayList<String>();
+        List<Integer> logsPhone = new ArrayList<Integer>();
+
+    
+        for(int i = 0; i<logsId.size();i++){
+            String sql = "SELECT Name, Phone FROM Users Where ID="+logsId.get(i);
+            System.out.println(logsId.get(i));
+            System.err.println(sql);
+            System.err.println("for loop");
+
+        
+       try {
+        Connection conn = this.connect();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        while (rs.next()){
+           
+            System.err.println("while error1");
+            logsName.add(rs.getString("Name")); 
+            logsPhone.add(rs.getInt("Phone")); 
+            System.out.println(logsName);
+            System.err.println("etter while");
+                }
+                
+            GUI.logsAction(logsName, logsPhone);
+            rs.close();
+            stmt.close();
+            conn.close();
+       } 
+    
+        catch (SQLException Sex){
+            System.out.println("feil" + Sex);
+        } 
+    }
+
+    }
 
     public void getID(int phone)  {
             
         List<Integer> logsId = new ArrayList<Integer>();
-        //List<String> logsName = new ArrayList<String>();
         String line;
         String bla = Integer.toString(phone);
         System.out.println(bla);
          
-        //String sql2 = "SELECT name FROM users Where ID="+logsId;
         
-        //Statement stmt2 = conn.createStatement();
         try {
             BufferedReader in = new BufferedReader(new FileReader(bla+".txt"));
             Connection conn = this.connect();
@@ -273,34 +309,38 @@ public class Query {
             while((line = in.readLine()) != null){
                 int lineInt = Integer.parseInt(line);
             System.out.println(lineInt);
-            String sql = "SELECT INFO_reciveID FROM info_exchange WHERE INFO_giveID = " + lineInt;
+            String sql = "SELECT INFOreciveID FROM infoExchange WHERE INFOgiveID = " + lineInt;
             System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
             System.out.println(sql);
           
-
-            //ResultSet rs2 = stmt2.executeQuery(sql2);
             while (rs.next()){
                System.out.println(line);
-                logsId.add(rs.getInt("INFO_reciveID"));
-                System.out.println(logsId);
-                in.close();
-
+                logsId.add(rs.getInt("INFOreciveID"));
                 //logsName.add(rs2.getString("name"));    
     }   
           //useID(logsId);
-       
+          System.out.println(logsId);
+          rs.close();
+          stmt.close(); 
+          conn.close();
+          in.close();
+
+
+
         //stmt2.close();
         //System.out.println(logsName);
         //GUI.logsAction(logsName);
         }
     }
         catch (SQLException Sex){
-            System.out.println("feil");
+            System.out.println("feil" + Sex);
         }
         catch (Exception e){
             System.out.println("feil e" + e);
         }   
+        useID(logsId);
+
     }  
     }
          
