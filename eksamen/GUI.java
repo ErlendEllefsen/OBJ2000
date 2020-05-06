@@ -24,6 +24,7 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //Lager første Pane
         pane = new BorderPane();
         pane.setTop(new HeaderPane(title, 50, 50));
         pane.setCenter(new OptionsHeaderPane("Register", "Login"));
@@ -36,7 +37,8 @@ public class GUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
+        // Diverse Actions som skjer når feks buttons blir trykket på.
+        // Setter nye panes i top, center, bottom, left eller right
     public static BorderPane registerAction() {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Register", 50, 50));
         ((BorderPane) pane).setCenter(new RegisterPane());

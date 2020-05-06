@@ -380,7 +380,7 @@ public class Query {
                 logsId.add(rs.getInt("INFOreciveID"));
     } 
         if(logsId.size() == 0){
-            ErrorMessage error = new ErrorMessage("Ingen liker deg");
+            ErrorMessage error = new ErrorMessage("No matches!");
             System.out.print(error);
         }
           rs.close();
