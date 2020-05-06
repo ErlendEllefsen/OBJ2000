@@ -17,7 +17,6 @@ class Output extends StackPane {
     
     Output(List<Integer> ageList, List<String> sexList, List<String> interestList1, List<String> interestList2, List<String> interestList3, List<Integer> idList, int phone, List<Integer> ratingList){
         TableView<Person> table = new TableView<Person>();
-        System.out.println(ratingList);
         
         ObservableList<Person> data = FXCollections.observableArrayList();
         for (int element = 0; element<ageList.size();element++) {

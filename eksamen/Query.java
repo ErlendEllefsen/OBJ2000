@@ -13,7 +13,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +22,7 @@ public class Query {
         // SQLite connection string
         String url = "jdbc:sqlite:./db/DateMe.db";
         Connection conn = null;
+        
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
@@ -34,8 +34,8 @@ public class Query {
     public void insert(String name, int age, int phone, String sex, String intrest1, String intrest2, String intrest3,
             String city) {
         String sql = "INSERT INTO users(name, age, phone, sex, interest1, interest2, interest3, city) VALUES(?,?,?,?,?,?,?, ?)";
-
-        try (Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        Connection conn = this.connect(); 
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
             pstmt.setInt(2, age);
             pstmt.setInt(3, phone);
@@ -45,10 +45,18 @@ public class Query {
             pstmt.setString(7, intrest3);
             pstmt.setString(8, city);
             pstmt.executeUpdate();
-            conn.close();
+            pstmt.close();
             login(phone);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }finally {
+            if (conn != null) {
+              try {
+                conn.close(); // <-- This is important
+              } catch (SQLException e) {
+                /* handle exception */
+              }
+            }
         }
     }
 
@@ -56,7 +64,6 @@ public class Query {
         try {
             String phoneString = new Integer(phone).toString();
             Files.deleteIfExists(Paths.get(phoneString + ".txt"));
-            System.out.println("Deletion successful.");
         } catch (NoSuchFileException e) {
             System.out.println("No such file/directory exists");
         } catch (IOException e) {
@@ -75,88 +82,111 @@ public class Query {
     public void login(int phone) {
         String sql = "SELECT ID FROM Users WHERE phone=" + phone;
         int id;
-        try (Connection conn = this.connect();
-                Statement stmt = conn.createStatement();
+        Connection conn = this.connect();
+        try (   Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
             id = rs.getInt("id");
             writeFile(id, phone);
             stmt.close();
             rs.close();
-            conn.close();
         }catch (SQLException e) {
             System.out.println("Error i login");
             System.out.println(e.getMessage());
+        }finally {
+            if (conn != null) {
+              try {
+                conn.close(); // <-- This is important
+              } catch (SQLException e) {
+                /* handle exception */
+              }
+            }
         }
 
     }
     public void searchResult (int ID_give, int phone) {
+        String sql = "SELECT * FROM Users WHERE ID=" + ID_give;
+        Connection conn = this.connect(); 
         try {
-            String sql = "SELECT * FROM Users WHERE ID=" + ID_give;
-            Connection conn = this.connect();
             Statement stmt  = conn.createStatement();
+            
             ResultSet rs    = stmt.executeQuery(sql); 
             int yourID = getLogged(phone);
             while(rs.next()) {
                 String name = rs.getString("name");
                 String phoneString = rs.getString("phone");
-                GUI.searchAction(name, phoneString, yourID, ID_give);
-                rs.close();
+                stmt.close();
+                GUI.searchAction(name, phoneString, yourID, ID_give, conn);
             }
-            stmt.close();
-            conn.close();
-            
+            rs.close();
+                
             
         }
         catch (Exception e)
             {
               System.err.println("searchResult Error");
               System.err.println(e.getMessage());
+            }finally {
+                if (conn != null) {
+                  try {
+                    conn.close(); // <-- This is important
+                  } catch (SQLException e) {
+                    /* handle exception */
+                  }
+                }
             }
     }
     public int getLogged(int phone){
         int yourID = 0;
+        Connection conn = this.connect();
         try {
             String sql = "SELECT ID FROM Users WHERE phone="+phone;
-            Connection conn = this.connect();
             Statement stmt  = conn.createStatement();
             ResultSet rs    = stmt.executeQuery(sql); 
             
             while(rs.next()) {
                 yourID = rs.getInt("id");
-                
             }
-
+            stmt.close();
             rs.close();   
-            conn.close();
         }
         catch (Exception e)
         {
             System.err.println("getLogged Error");
             System.err.println(e.getMessage());
+        }finally {
+            if (conn != null) {
+              try {
+                conn.close(); // <-- This is important
+              } catch (SQLException e) {
+                /* handle exception */
+              }
+            }
         }
         return yourID;
         
     }
 
-    public void sendId(int yourID, int ID_give) {
+    public void sendId(int yourID, int ID_give, Connection conn) {
         String sql = "INSERT INTO infoexchange(inforeciveid, infogiveid) VALUES(?,?)";
-        try (Connection conn = this.connect();
+        try (
         PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setInt(1, yourID);
         stmt.setInt(2, ID_give);
         stmt.executeUpdate();
         stmt.close();
-        conn.close();
-        System.out.println(yourID);
-        System.out.println(ID_give);
-
-        }
-        
-        
+        }  
         catch (SQLException e)
         {
             System.err.println("SendID Error");
             System.out.println(e.getMessage());
+        }finally {
+            if (conn != null) {
+              try {
+                conn.close(); // <-- This is important
+              } catch (SQLException e) {
+                /* handle exception */
+              }
+            }
         }
     }
     public void fillTable(int minAge, int maxAge, String sex, int phone) throws SQLException {
@@ -181,11 +211,18 @@ public class Query {
                 interest3List.add(rs.getString(5));
                 idList.add(rs.getInt(6));
             }
+            stmt.close();
+            rs.close();
             List<Integer> ratingList = getInterests(phone, interest1List, interest2List, interest3List);
             GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone, ratingList);
         }finally {
-            stmt.close();
-            conn.close();
+            if (conn != null) {
+              try {
+                conn.close(); // <-- This is important
+              } catch (SQLException e) {
+                /* handle exception */
+              }
+            }
         }
     }
            
@@ -203,7 +240,8 @@ public class Query {
                 userInterests.add(rs.getString(3));
                 
             }
-            System.out.println(userInterests);
+            stmt.close();
+            rs.close();
             int ratingPoint=0;
         for(int i = 0; i<interest1List.size(); i++){
             String firstInterest = new String(interest1List.get(i));
@@ -218,10 +256,6 @@ public class Query {
             boolean seventh = firstInterest.contentEquals(userInterests.get(2));
             boolean eighth = secondInterest.contentEquals(userInterests.get(2));
             boolean last = thirdInterest.contentEquals(userInterests.get(2));
-          
-            System.out.println(last);
-            System.out.println(thirdInterest + " " + userInterests.get(2));
-
             if(first == true)
                 ratingPoint=ratingPoint+12;
             if(second == true)
@@ -242,13 +276,17 @@ public class Query {
                 ratingPoint=ratingPoint+1;
 
             ratingList.add(ratingPoint);
-            System.out.println(ratingPoint);
             ratingPoint=0;
 
         }
         }finally {
-            stmt.close();
-            conn.close();
+            if (conn != null) {
+              try {
+                conn.close(); // <-- This is important
+              } catch (SQLException e) {
+                /* handle exception */
+              }
+            }
         }
 
         return ratingList;
@@ -266,12 +304,13 @@ public class Query {
         //String sql2 = "SELECT name FROM users Where ID="+logsId;
         
         //Statement stmt2 = conn.createStatement();
+        Connection conn = this.connect();
         try {
             BufferedReader in = new BufferedReader(new FileReader(bla+".txt"));
-            Connection conn = this.connect();
+            
             Statement stmt = conn.createStatement();
             while((line = in.readLine()) != null){
-                int lineInt = Integer.parseInt(line);
+            int lineInt = Integer.parseInt(line);
             System.out.println(lineInt);
             String sql = "SELECT INFO_reciveID FROM info_exchange WHERE INFO_giveID = " + lineInt;
             System.out.println(sql);
@@ -287,7 +326,9 @@ public class Query {
                 in.close();
 
                 //logsName.add(rs2.getString("name"));    
-    }   
+    } 
+    rs.close();
+    stmt.close();  
           //useID(logsId);
        
         //stmt2.close();
@@ -300,6 +341,14 @@ public class Query {
         }
         catch (Exception e){
             System.out.println("feil e" + e);
+        }finally {
+            if (conn != null) {
+              try {
+                conn.close(); // <-- This is important
+              } catch (SQLException e) {
+                /* handle exception */
+              }
+            }
         }   
     }  
     }

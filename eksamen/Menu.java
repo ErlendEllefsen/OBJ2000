@@ -58,11 +58,14 @@ class Menu extends StackPane {
             System.out.println(minAge+ "   "+maxAge);
             String sexV = sexCombo.getValue();
             Query query = new Query();
-            try {
-                query.fillTable(minAge, maxAge, sexV, phone);
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
+            
+                try {
+					query.fillTable(minAge, maxAge, sexV, phone);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+           
         });
         btnLogs.setOnAction(e -> {
             Query gg = new Query();

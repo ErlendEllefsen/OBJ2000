@@ -11,12 +11,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
  
 public class GUI extends Application {
-    private static String url = "jdbc:sqlite:./db/DateMe.db";
-    private static Connection conn = null;
+   // private static String url = "jdbc:sqlite:./db/DateMe.db";
+   // private static Connection conn = null;
 
     public static void main(String[] args) {
-        kobleOpp();
-        kobleNed();
+      //  kobleOpp();
+      //  kobleNed();
         launch(args);    
     }
 
@@ -36,7 +36,7 @@ public class GUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    private static void kobleOpp() {
+  /*  private static void kobleOpp() {  
     try {
         System.out.println("KOBLET OPP");
         conn = DriverManager.getConnection(url);
@@ -52,7 +52,7 @@ public class GUI extends Application {
     }
     catch (SQLException e) { }
     }
-
+*/
     public static BorderPane registerAction() {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Register", 50, 50));
         ((BorderPane) pane).setCenter(new RegisterPane());
@@ -82,8 +82,8 @@ public class GUI extends Application {
         return null;
     }
 
-    public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give) {
-        ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give));
+    public static BorderPane searchAction(String name, String phone, Integer yourID, Integer ID_give, Connection conn) {
+        ((BorderPane) pane).setRight(new SearchResult(name, phone, yourID, ID_give, conn));
         return null; 
     }
     public static BorderPane logsAction(List<String> logsName){
