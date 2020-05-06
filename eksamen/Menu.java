@@ -48,7 +48,7 @@ class Menu extends StackPane {
         Button btnLogs = new Button("Logs");
         setMargin(btnLogs, new Insets(300, 0, 0, 0));
         getChildren().addAll(label, sliderLabel, minSlider, maxSlider, sexCombo, btnSearch, sexLabel, btnLogs);
-        setStyle("-fx-background-color: pink;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
+        setStyle("-fx-background-color: #e1383c;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
                 + "-fx-font-size: 15;");
         setPadding(new Insets(0, 10, 0, 10));
 

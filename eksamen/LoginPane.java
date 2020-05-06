@@ -16,7 +16,7 @@ class LoginPane extends StackPane {
         name.setPrefWidth(180);
         name.setMaxWidth(180);
         getChildren().addAll(label, btnLogin, name);
-        setStyle("-fx-background-color: pink;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
+        setStyle("-fx-background-color: #f2b09f;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
                 + "-fx-font-size: 20;");
         btnLogin.setOnAction(e -> {
             String phoneString = name.getText();

@@ -19,12 +19,14 @@ public class GUI extends Application {
     static String title = "DateMe";
     static String info = "DateMe. For You By Us.";
 
+
     @Override
     public void start(Stage primaryStage) {
         pane = new BorderPane();
         pane.setTop(new HeaderPane(title, 50, 50));
         pane.setCenter(new OptionsHeaderPane("Register", "Login"));
         pane.setBottom(new FooterHeaderPane(info));
+        pane.setStyle("-fx-background-color: #f2b09f;");
 
         Scene scene = new Scene(pane, 700, 700);
         primaryStage.setTitle(title);

@@ -19,7 +19,7 @@ class OptionsHeaderPane extends StackPane {
         login.setMinHeight(100);
         getChildren().addAll(register, login);
         setStyle(
-            "-fx-background-color: orange;"+ 
+            "-fx-background-color: #f2b09f;"+ 
             "-fx-font-family: Courier New;"+
             "-fx-font-weight: bold;"+
             "-fx-font-size: 20;"

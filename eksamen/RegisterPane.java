@@ -84,7 +84,7 @@ class RegisterPane extends StackPane {
         intrest3Combo.setPrefWidth(120);
         intrest3Combo.setMaxWidth(120);
         setStyle(
-            "-fx-background-color: orange;"+ 
+            "-fx-background-color: #f2b09f;"+ 
             "-fx-font-family: Courier New;"+
             "-fx-font-weight: bold;"+
             "-fx-font-size: 15;"
