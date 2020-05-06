@@ -53,7 +53,7 @@ class Menu extends StackPane {
         matchesAmount.getItems().addAll(10,20);
         setMargin(matchesAmount, new Insets(100, 0, 0, 0));
         getChildren().addAll(label, sliderLabel, minSlider, maxSlider, sexCombo, btnSearch, sexLabel, btnLogs, matchesAmount, rowsLabel);
-        setStyle("-fx-background-color: pink;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
+        setStyle("-fx-background-color: #e1383c;" + "-fx-font-family: Courier New;" + "-fx-font-weight: bold;"
                 + "-fx-font-size: 15;");
         setPadding(new Insets(0, 10, 0, 10));
 
