@@ -12,6 +12,7 @@ public class GUI extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        // Sletter alle tekstfiler
         deleteFile file = new deleteFile();
         System.out.println(file);
     }
