@@ -35,11 +35,12 @@ class SearchResult extends StackPane {
                     Label phoneLabel = new Label(phoneToLabel);
                     
                     FlowPane flowInfo = new FlowPane(Orientation.VERTICAL, 15.0,5.0,headerLabel, nameLabel, phoneLabel);
+                    flowInfo.setPrefSize(250,250);
 
                     getChildren().add(flowInfo);   
                 
                 setStyle(
-                "-fx-background-color: blue;" + 
+                "-fx-background-color: white;" + 
                 "-fx-font-family: Courier New;"+
                 "-fx-font-weight: bold;"+
                 "-fx-font-size: 20;"

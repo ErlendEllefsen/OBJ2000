@@ -73,6 +73,7 @@ public class GUI extends Application {
         ((BorderPane) pane).setCenter(new OptionsHeaderPane("Register", "Login"));
         ((BorderPane) pane).setBottom((new FooterHeaderPane(info)));
         ((BorderPane) pane).setLeft(null);
+        ((BorderPane) pane).setRight(null);
 		return null;
     }
     public static BorderPane registerDone(int phone){
