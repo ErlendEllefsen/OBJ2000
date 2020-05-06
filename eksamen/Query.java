@@ -293,7 +293,6 @@ public class Query {
 
     }
     public void useID(List<Integer> logsId){
-        int input;
         List<String> logsName = new ArrayList<String>();
         List<Integer> logsPhone = new ArrayList<Integer>();
 
@@ -325,8 +324,8 @@ public class Query {
             conn.close();
        } 
     
-        catch (SQLException Sex){
-            System.out.println("feil" + Sex);
+        catch (SQLException e){
+            System.out.println("feil" + e);
         } 
     }
 
@@ -340,40 +339,29 @@ public class Query {
         System.out.println(bla);
          
         
-        //Statement stmt2 = conn.createStatement();
         Connection conn = this.connect();
         try {
             BufferedReader in = new BufferedReader(new FileReader(bla+".txt"));
             
-            Statement stmt = conn.createStatement();
             while((line = in.readLine()) != null){
             int lineInt = Integer.parseInt(line);
             System.out.println(lineInt);
-            String sql = "SELECT INFOreciveID FROM infoExchange WHERE INFOgiveID = " + lineInt;
+            String sql = "SELECT INFOgiveID FROM InfoExchange WHERE INFOreciveID ="+lineInt;
             System.out.println(sql);
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             System.out.println(sql);
           
             while (rs.next()){
                System.out.println(line);
-                logsId.add(rs.getInt("INFOreciveID"));
-                //logsName.add(rs2.getString("name"));    
+                logsId.add(rs.getInt("INFOgiveID"));
     } 
-    rs.close();
-    stmt.close();  
-          //useID(logsId);
           System.out.println(logsId);
           rs.close();
           stmt.close(); 
-          conn.close();
-          in.close();
-
-
-
-        //stmt2.close();
-        //System.out.println(logsName);
-        //GUI.logsAction(logsName);
         }
+        in.close();
+
     }
         catch (SQLException Sex){
             System.out.println("feil" + Sex);
