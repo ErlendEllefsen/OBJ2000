@@ -113,7 +113,7 @@ public class Query {
         Connection conn = this.connect(); 
         try {
             Statement stmt  = conn.createStatement();
-            
+            System.out.println("testing");
             ResultSet rs    = stmt.executeQuery(sql); 
             int yourID = getLogged(phone);
             while(rs.next()) {
@@ -202,7 +202,7 @@ public class Query {
         List<String> interest2List = new ArrayList<String>();
         List<String> interest3List = new ArrayList<String>();
         List<Integer> idList = new ArrayList<Integer>();
-        String sql = "SELECT Age, Sex, City, Interest1, Interest2, Interest3, Phone, ID FROM Users WHERE Age BETWEEN " + minAge + " AND " + maxAge + " AND Sex="+"'"+ sex +"'";
+        String sql = "SELECT Age, Sex, Interest1, Interest2, Interest3, Phone, ID, City FROM Users WHERE Age BETWEEN " + minAge + " AND " + maxAge + " AND Sex="+"'"+ sex +"'";
         Connection conn = this.connect();
         Statement stmt = conn.createStatement();
         try {
@@ -214,17 +214,17 @@ public class Query {
                 else{
                 ageList.add(rs.getInt(1));
                 sexList.add(rs.getString(2));
-                cityList.add(rs.getString(3));
-                interest1List.add(rs.getString(4));
-                interest2List.add(rs.getString(5));
-                interest3List.add(rs.getString(6));
+                cityList.add(rs.getString(8));
+                interest1List.add(rs.getString(3));
+                interest2List.add(rs.getString(4));
+                interest3List.add(rs.getString(5));
                 idList.add(rs.getInt(7));
                 }
             }
             stmt.close();
             rs.close();
             List<Integer> ratingList = getInterests(phone, interest1List, interest2List, interest3List);
-            GUI.matchSearch(ageList, sexList, cityList, interest1List, interest2List, interest3List, idList, phone, ratingList, amountofMatches);
+            GUI.matchSearch(ageList, sexList, interest1List, interest2List, interest3List, idList, phone, ratingList, amountofMatches, cityList);
         }finally {
             if (conn != null) {
               try {
