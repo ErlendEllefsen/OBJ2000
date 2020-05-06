@@ -48,6 +48,7 @@ public class Query {
             pstmt.close();
             login(phone);
         } catch (SQLException e) {
+            ErrorMessage error = new ErrorMessage("User is already registered or you have empty fields");
             System.out.println(e.getMessage());
         }finally {
             if (conn != null) {
@@ -74,6 +75,7 @@ public class Query {
             FileWriter writer = new FileWriter(phone + ".txt", true);
             writer.write(new Integer(Id).toString());
             writer.close();
+            GUI.registerDone(phone);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,8 +92,8 @@ public class Query {
             stmt.close();
             rs.close();
         }catch (SQLException e) {
-            System.out.println("Error i login");
-            System.out.println(e.getMessage());
+            ErrorMessage error = new ErrorMessage("Bruker finnes ikke");
+            System.out.println(e.getMessage() + error);
         }finally {
             if (conn != null) {
               try {
@@ -383,6 +385,3 @@ public class Query {
     }
          
             
-
-
-

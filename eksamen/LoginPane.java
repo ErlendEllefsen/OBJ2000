@@ -28,7 +28,7 @@ class LoginPane extends StackPane {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-            GUI.registerDone(phone);
+            
         });
     }
 }
