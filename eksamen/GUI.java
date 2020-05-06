@@ -22,7 +22,7 @@ public class GUI extends Application {
 
     private static BorderPane pane;
     static String title = "DateMe";
-    static String info = "Made by Erlend Ellefsen, Robin Ellingsen and Jon Stareng";
+    static String info = "DateMe. For You By Us.";
 
     @Override
     public void start(Stage primaryStage) {

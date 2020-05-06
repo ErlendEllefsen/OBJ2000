@@ -82,8 +82,8 @@ public class Query {
             writeFile(id, phone);
             stmt.close();
             rs.close();
-            conn.close();
-        }catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Error i login");
             System.out.println(e.getMessage());
         }

@@ -19,9 +19,7 @@ class SearchResult extends StackPane {
         infoAlert.setContentText("Are you sure you want to get this persons info?" + "\n" + "Remember that his person can see this action!");
 
         Optional<ButtonType> result = infoAlert.showAndWait();
-            if (result.get() == ButtonType.OK){
-                Query sendID = new Query();
-                sendID.sendId(yourID, ID_give); 
+            if (result.get() == ButtonType.OK){ 
                 {
                     Label headerLabel = new Label("User Info");
                     String infoName = new String (name);
@@ -43,6 +41,8 @@ class SearchResult extends StackPane {
                 "-fx-font-weight: bold;"+
                 "-fx-font-size: 20;"
                 );
+                Query sendID = new Query();
+                sendID.sendId(yourID, ID_give);
                 }
             }
 
