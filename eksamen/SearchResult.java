@@ -33,7 +33,7 @@ class SearchResult extends StackPane {
                 sendID.sendId(yourID, ID_give, conn); 
                 {
                     BorderPane bp = new BorderPane();
-                    Button xButton = new Button("Fjern vindu");
+                    Button xButton = new Button("Remove window");
                     xButton.setTextFill(Color.web("#3b323f", 0.8));
                     Label headerLabel = new Label("User Info");
                     headerLabel.setTextFill(Color.web("#3b323f", 0.8));

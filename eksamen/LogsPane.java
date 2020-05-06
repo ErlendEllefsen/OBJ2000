@@ -22,12 +22,12 @@ class LogsPane extends StackPane{
             input = input.concat("Navn: " + logsName.get(i)+ "\n" + "Tlfnr: " + inputP + "\n" + "\n");
         }
         //String logsIdString = Integer.toString(logsID);
-        Label logsLabel = new Label("Mulig match: " + "\n" + "\n" + input);
+        Label logsLabel = new Label("Possible match: " + "\n" + "\n" + input);
         BorderPane bp = new BorderPane();
                     ScrollPane scrollPane = new ScrollPane(logsLabel);
                     scrollPane.setPrefSize(250,250);
                     //scrollPane.setStyle("-fx-background-color: pink;");
-        Button xButton = new Button("Fjern vindu");
+        Button xButton = new Button("Remove window");
         xButton.setTextFill(Color.web("#3b323f", 0.8));
         xButton.setMinWidth(250);
         bp.setTop(xButton);
