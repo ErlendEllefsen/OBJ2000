@@ -101,9 +101,15 @@ class RegisterPane extends StackPane {
             String intrest1 = intrest1Combo.getValue();
             String intrest2 = intrest2Combo.getValue();
             String intrest3 = intrest3Combo.getValue();
+            boolean case1 = intrest1.contentEquals(intrest2);
+            boolean case2 = intrest1.contentEquals(intrest3);
+            boolean case3 = intrest2.contentEquals(intrest3);
+            if(case1 == true || case2 == true || case3 == true){
+                ErrorMessage error = new ErrorMessage("Duplicate interests not allowed!");
+            }else{
             Query query = new Query();
             query.insert(name, age, phone, sexV, intrest1, intrest2, intrest3, city);
-            GUI.registerDone(phone);
+            }
         });
     }
 }

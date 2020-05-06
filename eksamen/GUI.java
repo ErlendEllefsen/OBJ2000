@@ -1,22 +1,15 @@
 package eksamen;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
  
 public class GUI extends Application {
-   // private static String url = "jdbc:sqlite:./db/DateMe.db";
-   // private static Connection conn = null;
 
     public static void main(String[] args) {
-      //  kobleOpp();
-      //  kobleNed();
         launch(args);    
     }
 
@@ -36,23 +29,6 @@ public class GUI extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-  /*  private static void kobleOpp() {  
-    try {
-        System.out.println("KOBLET OPP");
-        conn = DriverManager.getConnection(url);
-    }
-    catch (SQLException e) {
-        System.out.println("Oppkobling til databasen" + url + " feilet." + "\n" + e.toString() );
-    }
-}
-    private static void kobleNed() {
-    try {
-        System.out.println("KOBLET NED");
-        conn.close();
-    }
-    catch (SQLException e) { }
-    }
-*/
     public static BorderPane registerAction() {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Register", 50, 50));
         ((BorderPane) pane).setCenter(new RegisterPane());
@@ -78,6 +54,7 @@ public class GUI extends Application {
     public static BorderPane registerDone(int phone){
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Home Page", 25, 30));
         ((BorderPane) pane).setLeft(new Menu(phone));
+        ((BorderPane) pane).setCenter(null);
         ((BorderPane) pane).setBottom((new FooterMenuPane()));
         return null;
     }
