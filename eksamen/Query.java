@@ -1,7 +1,6 @@
 package eksamen;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class Query {
 
     public void insert(String name, int age, int phone, String sex, String intrest1, String intrest2, String intrest3,
             String city) {
-        String sql = "INSERT INTO users(name, age, phone, sex, interest1, interest2, interest3, city) VALUES(?,?,?,?,?,?,?, ?)";
+        String sql = "INSERT INTO users(name, age, phone, sex, interest1, interest2, interest3, city) VALUES(?,?,?,?,?,?,?,?)";
         Connection conn = this.connect(); 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, name);
@@ -49,7 +48,7 @@ public class Query {
             login(phone);
         } catch (SQLException e) {
             ErrorMessage error = new ErrorMessage("User is already registered or you have empty fields");
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + " " + error);
         }finally {
             if (conn != null) {
               try {

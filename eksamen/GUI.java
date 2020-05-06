@@ -35,7 +35,6 @@ public class GUI extends Application {
         ((BorderPane) pane).setTop(new HeaderPane(title + " - Register", 50, 50));
         ((BorderPane) pane).setCenter(new RegisterPane());
         ((BorderPane) pane).setBottom(new BackPane("Go Back"));
-
         return null;
     }
 
