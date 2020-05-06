@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+/*
+** FooterheaderPane oppretter panelet som ligger i bunnen av boderpane på første side av applikasjonen
+** enkel label og styling av den.
+*/
 class FooterHeaderPane extends StackPane {
     public FooterHeaderPane(String info){
         Label label = new Label(info);

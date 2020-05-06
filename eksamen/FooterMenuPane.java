@@ -5,6 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+
+/*
+** FooterMenuPane oppretter logoutknap for meny siden og styler den
+*/
 class FooterMenuPane extends StackPane {
     FooterMenuPane(){
         Button btnLogOut = new Button("Log Out");

@@ -80,9 +80,9 @@ class Output extends StackPane {
         setStyle(
         "-fx-background-color: #f2b09f;");
         table.setRowFactory(tv -> {
-            // Define our new TableRow
             TableRow<Person> row = new TableRow<>();
             row.setStyle("-fx-background-color: #f2b09f");
+            //Kjører ID searchResult query og henter ID.
             row.setOnMouseClicked(event -> {
                 int ID_give = table.getSelectionModel().getSelectedItem().getId();
                 Query query = new Query();
@@ -92,7 +92,7 @@ class Output extends StackPane {
         });
 
     }
-    
+    //Setter høyde på radene. 
     private double setRowSize(int amountofMatches) {
         int rows = 52;
         if(amountofMatches==10)
