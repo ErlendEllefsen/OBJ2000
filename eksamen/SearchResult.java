@@ -66,7 +66,7 @@ class SearchResult extends StackPane {
                     });
                 
                 setStyle(
-                "-fx-background-color: #e1383c;" + 
+                "-fx-background-color: #de5c6e;" + 
                 "-fx-font-family: Courier New;"+
                 "-fx-font-weight: bold;"+
                 "-fx-font-size: 20;"
