@@ -53,9 +53,8 @@ public class Query {
         }finally {
             if (conn != null) {
               try {
-                conn.close(); // <-- This is important
+                conn.close(); 
               } catch (SQLException e) {
-                /* handle exception */
               }
             }
         }
@@ -97,9 +96,8 @@ public class Query {
         }finally {
             if (conn != null) {
               try {
-                conn.close(); // <-- This is important
+                conn.close(); 
               } catch (SQLException e) {
-                /* handle exception */
               }
             }
         }
@@ -130,9 +128,8 @@ public class Query {
             }finally {
                 if (conn != null) {
                   try {
-                    conn.close(); // <-- This is important
+                    conn.close(); 
                   } catch (SQLException e) {
-                    /* handle exception */
                   }
                 }
             }
@@ -158,9 +155,8 @@ public class Query {
         }finally {
             if (conn != null) {
               try {
-                conn.close(); // <-- This is important
+                conn.close(); 
               } catch (SQLException e) {
-                /* handle exception */
               }
             }
         }
@@ -184,9 +180,8 @@ public class Query {
         }finally {
             if (conn != null) {
               try {
-                conn.close(); // <-- This is important
+                conn.close(); 
               } catch (SQLException e) {
-                /* handle exception */
               }
             }
         }
@@ -220,9 +215,8 @@ public class Query {
         }finally {
             if (conn != null) {
               try {
-                conn.close(); // <-- This is important
+                conn.close(); 
               } catch (SQLException e) {
-                /* handle exception */
               }
             }
         }
@@ -284,9 +278,8 @@ public class Query {
         }finally {
             if (conn != null) {
               try {
-                conn.close(); // <-- This is important
+                conn.close();
               } catch (SQLException e) {
-                /* handle exception */
               }
             }
         }
@@ -294,6 +287,11 @@ public class Query {
         return ratingList;
 
     }
+    /*
+    ** useId bruker logsId som blir hentet fra getID metoden. 
+    ** for løkken pakker ut verdiene i logsId arraylisten slik at alle verdiene utfører en spørring. 
+    ** Videre blir  narv og tlfnr på matchene lagt inn to forskjellige arraylist og sendt videre til GUI.java
+    */
     public void useID(List<Integer> logsId){
         List<String> logsName = new ArrayList<String>();
         List<Integer> logsPhone = new ArrayList<Integer>();
@@ -313,11 +311,8 @@ public class Query {
 
         while (rs.next()){
            
-            System.err.println("while error1");
             logsName.add(rs.getString("Name")); 
             logsPhone.add(rs.getInt("Phone")); 
-            System.out.println(logsName);
-            System.err.println("etter while");
                 }
                 
             GUI.logsAction(logsName, logsPhone);
@@ -333,13 +328,20 @@ public class Query {
 
     }
 
+    /*
+    ** getID metoden sin funksjon er å hente ut ID fra txtfil og matche den iden med INFOgiveId dra databasen
+    ** INFOgiveID er id til den personen som er logget inn i applikasjonen når den trykker for å få mer informasjon om en bruker
+    ** Derfor matcher vi INFOgiveID med lineInt som har verdien fra txtfil (altså den som er logget inn) 
+    ** Videre blir ID på de som har blitt søkt opp altså INFOreciveID lagret i en arraylist og tatt med videre til useID metoden
+    ** nederst i denne metoden er useID fordi getID er koblet til logs knappen i gui. 
+    ** getID blir kjørt igjenom ved trykk på knappen og useID
+    */
+
     public void getID(int phone)  {
             
         List<Integer> logsId = new ArrayList<Integer>();
         String line;
-        String bla = Integer.toString(phone);
-        System.out.println(bla);
-         
+        String bla = Integer.toString(phone);         
         
         Connection conn = this.connect();
         try {
@@ -347,18 +349,13 @@ public class Query {
             
             while((line = in.readLine()) != null){
             int lineInt = Integer.parseInt(line);
-            System.out.println(lineInt);
-            String sql = "SELECT INFOgiveID FROM InfoExchange WHERE INFOreciveID ="+lineInt;
-            System.out.println(sql);
+            String sql = "SELECT INFOreciveID FROM InfoExchange WHERE INFOgiveID ="+lineInt;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            System.out.println(sql);
           
             while (rs.next()){
-               System.out.println(line);
-                logsId.add(rs.getInt("INFOgiveID"));
+                logsId.add(rs.getInt("INFOreciveID"));
     } 
-          System.out.println(logsId);
           rs.close();
           stmt.close(); 
         }
@@ -373,9 +370,8 @@ public class Query {
         }finally {
             if (conn != null) {
               try {
-                conn.close(); // <-- This is important
+                conn.close(); 
               } catch (SQLException e) {
-                /* handle exception */
               }
             }
         }   
